@@ -16,6 +16,7 @@ public class Ex02 {
 		int eat = apple / human;
 		int count = apple % human;
 		
+		System.out.printf("한 사람이 먹은 사과의 개수 : %d\n", eat);
 		System.out.printf("총 %d개의 사과를 %d명의 사람이 %d개씩 먹어서 %d개가 남았다.", apple, human, eat, count);
 	}
 	
