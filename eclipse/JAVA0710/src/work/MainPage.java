@@ -3,9 +3,8 @@ package work;
 import java.util.Scanner;
 import work.User;
 
-public class main {
+public class MainPage {
 	public static void main(String[] args) {
-		
 		Scanner scan = new Scanner(System.in);
 		boolean run1 = true;
 		boolean run2 = true;
@@ -73,7 +72,7 @@ public class main {
 				break;
 			}
 		}
+		run1 = true;
 		System.out.println("프로그램 종료");
 	}
-	
 }
