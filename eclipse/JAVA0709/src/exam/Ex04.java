@@ -14,33 +14,37 @@ public class Ex04 {
 		int num1 = getNumber("첫 번째 숫자 : ", scan);
 		int num2 = getNumber("두 번째 숫자 : ", scan);
 		int num3 = getNumber("세 번째 숫자 : ", scan);
+		int result = maxNum(num1, num2, num3);
 		
-		if ( num1 > num2 ) {
-			if ( num1 > num3 ) {
-				System.out.printf("최대값 : %d", num1);
-			}
-			else {
-				System.out.printf("최대값 : %d", num3);
-			}
-		}
-		else if ( num1 < num2) {
-			if( num2 > num3 ) {
-				System.out.printf("최대값 : %d", num2);
-			}
-			else {
-				System.out.printf("최대값 : %d", num3);
-			}
-		}
-		else {
-			System.out.printf("최대값 : %d", num3);
-		}
-		
+		System.out.println(result);		
 	}
 	
 	public static int getNumber(String msg, Scanner sc) {
 		System.out.print(msg);
 		String input = sc.nextLine();
 		return Integer.parseInt(input);
+	}
+	
+	public static int maxNum(int x, int y, int z) {
+		if ( x > y ) {
+			if ( x > z ) {
+				return x;
+			}
+			else {
+				return z;
+			}
+		}
+		else if ( x < y) {
+			if( y > z ) {
+				return y;
+			}
+			else {
+				return z;
+			}
+		}
+		else {
+			return z;
+		}
 	}
 
 }

@@ -10,8 +10,9 @@ import java.util.Scanner;
 public class Ex05 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		System.out.print("점수를 입력하세요 : ");
+		System.out.print("점수를 입력하세요( 0 ~ 100 ) : ");
 		int score = scan.nextInt();
+		String str = "";
 		
 		if( score < 0 && score > 100){
 			System.out.println("다시 입력하세요.");
@@ -19,21 +20,61 @@ public class Ex05 {
 			score = scan.nextInt();
 		}
 		
-		if( score >= 90) {
-			System.out.println("A");
+		String st1 = (score >= 90) ? "A": (score >= 80) ? "B" : (score >= 70) ? "C" : (score >= 60) ?"D" : "F";
+		System.out.println(st1);
+		
+		
+		String result = resultSwitch(score, str);
+		System.out.println(result);
+	}
+	
+	public static String resultElseIf(int x, String result) {
+		if( x >= 90) {
+			result = "A";
 		}
-		else if(score >= 80) {
-			System.out.println("B");
+		else if(x >= 80) {
+			result = "B";
 		}
-		else if(score >= 70) {
-			System.out.println("C");
+		else if(x >= 70) {
+			result = "C";
 		}
-		else if(score >= 60) {
-			System.out.println("D");
+		else if(x >= 60) {
+			result = "D";
 		}
 		else {
-			System.out.println("F");
+			result = "F";
 		}
+		
+		return result;
+	}
+	
+	public static String resultSwitch(int x, String result) {
+		
+		int grade = x / 10;
+		
+		switch(grade) {
+			case 10:
+				result = "A";
+				break;
+			case 9:
+				result = "A";
+				break;
+			case 8:
+				result = "B";
+				break;
+			case 7:
+				result = "C";
+				break;
+			case 6:
+				result = "D";
+				break;
+			default:
+				result = "F";
+				break;	
+		}
+		
+		return result;
+		
 	}
 	
 }

@@ -10,17 +10,14 @@ public class Ex03 {
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
+		int a = 0, b = 0;
 		
-		int a = getNumber("첫번째 숫자를 입력하세요 : ", scan);
-		int b = getNumber("두번째 숫자를 입력하세요 : ", scan);
-		int number = ( a > b ) ? a : ( a == b ) ? 0 : b;
+		a = getNumber("첫번째 숫자를 입력하세요 : ", scan);
+		b = getNumber("두번째 숫자를 입력하세요 : ", scan);
+		int result = ( a > b ) ? a : ( a == b ) ? 0 : b;
 		
-		if( number == 0 ) {
-			System.out.println("두 숫자는 같습니다.");
-		}
-		else {
-			System.out.printf("두 숫자중 큰 수는 %d입니다.", number);
-		}
+		System.out.println(result);
+
 
 	}
 
