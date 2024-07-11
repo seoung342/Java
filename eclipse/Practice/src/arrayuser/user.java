@@ -1,3 +1,6 @@
+/*
+ * 회원 가입해서 입, 출금 관리
+ * */
 package arrayuser;
 
 import java.util.Scanner;
@@ -5,6 +8,7 @@ import java.util.Scanner;
 public class user {
 
 	public static void main(String[] args) {
+		
 		Scanner scan = new Scanner(System.in);
 		boolean run1 = true;
 		boolean run2 = true;
@@ -22,13 +26,17 @@ public class user {
 		int i;
 		String myId = ""; // 내 아이디
 		String myPass = ""; // 내 비밀번호
+		String str = "";
 		
 		while(run1) {
 			System.out.println("-------------------------------------------------");
 			System.out.println(" 1.로그인 | 2.회원가입 | 3.종료");
 			System.out.println("-------------------------------------------------");
-			System.out.print("선택 > ");
-			num = Integer.parseInt(scan.nextLine());
+			do{
+				System.out.print("선택 > ");
+				str = scan.nextLine();
+			}while(!str.matches("^[0-9]$"));
+			num = Integer.parseInt(str);
 			switch(num) {
 			case 1:
 				System.out.println("로그인 처리");
@@ -46,25 +54,38 @@ public class user {
                     System.out.println("로그인 성공");
 					while(run2) {
 						System.out.println("-------------------------------------------------");
-						System.out.println(" 1.예금 | 2.출금 | 3.잔고 | 4.종료");
+						System.out.println(" 1.예금 | 2.출금 | 3.잔고 | 4.내 정보 확인 | 5.종료");
 						System.out.println("-------------------------------------------------");
-						System.out.print("선택 > ");
-						num = Integer.parseInt(scan.nextLine());
+						do{
+							System.out.print("선택 > ");
+							str = scan.nextLine();
+						}while(!str.matches("^[0-9]$"));
+						num = Integer.parseInt(str);
 						switch(num) {
 						case 1:
-							System.out.print("예금할 금액 > ");
-							balance = Integer.parseInt(scan.nextLine());
+							do{
+								System.out.print("예금할 금액 > ");
+								str = scan.nextLine();
+							}while(!str.matches("^[0-9]+$"));
+							balance = Integer.parseInt(str);
 							Money[index] += balance;
 							break;
 						case 2:
-							System.out.print("츨금할 금액 > ");
-							balance = Integer.parseInt(scan.nextLine());
+							do{
+								System.out.print("츨금할 금액 > ");
+								str = scan.nextLine();
+							}while(!str.matches("^[0-9]+$"));
+							balance = Integer.parseInt(str);
 							Money[index] -= balance;
 							break;
 						case 3:
 							System.out.printf("잔고 > %d\n",Money[index]);
 							break;
 						case 4:
+							System.out.print("\n [내 정보] \n 1. 이름 : "+Name[index]+"\n 2. 주민번호 앞 6자리 : "+Personal[index]
+									+"\n 3. 전화번호 : "+Phone[index]+"\n 4. 아이디 : "+Id[index]+"\n 5. 비밀번호 : "+Pass[index]+"\n 6. 잔고 : "+Money[index]+"\n");
+							break;
+						case 5:
 							System.out.println("예금 / 출금 프로그램 종료");
 							run2 = false;
 							break;
@@ -96,10 +117,10 @@ public class user {
 				Phone[index] = scan.nextLine();
 				System.out.print("4. 아이디 : ");
 				Id[index] = scan.nextLine();
-				System.out.print("5. 비밀번호 ");
+				System.out.print("5. 비밀번호 : ");
 				Pass[index] = scan.nextLine();
 				System.out.print("\n [입력된 내용] \n 1. 이름 : "+Name[index]+"\n 2. 주민번호 앞 6자리 : "+Personal[index]
-									+"\n 3. 전화번호 : "+Phone[index]+"\n 4. 아이디 : "+Id[index]+"\n 5.비밀번호 : "+Pass[index]+"\n");
+									+"\n 3. 전화번호 : "+Phone[index]+"\n 4. 아이디 : "+Id[index]+"\n 5. 비밀번호 : "+Pass[index]+"\n");
 				break;			
 			case 3:
 				run1 = false;
