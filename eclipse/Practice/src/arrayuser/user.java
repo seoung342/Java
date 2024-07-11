@@ -1,11 +1,8 @@
-/*
- * 배열을 사용해서 여러 회원정보를 관리하기
- * */
-package arrayuse;
+package arrayuser;
 
 import java.util.Scanner;
 
-public class UseArray {
+public class user {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
