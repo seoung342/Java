@@ -1,15 +1,21 @@
 package project2;
 
-public class User {
+public class User implements java.io.Serializable{
 	String myId; // 아이디
 	String myPass; // 비밀번호
-	int myMoney = 0; // 잔고
+	int myMoney; // 잔고
 	String Name; // 이름
 	String Personal; // 주민번호
 	String Phone; // 전화 번호
 	
-	User(){ // 생성자
-	}
+	public User(String name, String personal, String phone, String id, String pass) {
+        this.Name = name;
+        this.Personal = personal;
+        this.Phone = phone;
+        this.myId = id;
+        this.myPass = pass;
+        this.myMoney = 0; // 초기 잔고 0으로 설정
+    }
 	
 	public void setId(String id) {
 		this.myId = id;
