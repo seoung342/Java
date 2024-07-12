@@ -17,7 +17,7 @@ public class Ex05 {
 		double[][] score = new double[x][3]; 
 		
 		for(int i = 0; i < name.length; i++) {
-			System.out.print("학생의 이름 > ");
+			System.out.print("\n학생의 이름 > ");
 			name[i] = scan.nextLine();
 			System.out.print("국어 점수 > ");
 			score[i][0] = Double.parseDouble(scan.nextLine());
@@ -26,6 +26,7 @@ public class Ex05 {
 			score[i][2] = (score[i][0] + score[i][1]) / 2;
 		}
 		
+		System.out.println();
 		for (int j = 0; j < name.length; j++) {
 			System.out.println(name[j]+"의 국어 점수는 "+score[j][0]+" 수학 점수는 "+score[j][1]+" 평균은 "+score[j][2]+"입니다.");
 		}
