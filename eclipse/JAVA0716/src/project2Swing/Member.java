@@ -1,4 +1,4 @@
-package project1_2;
+package project2Swing;
 
 import java.io.Serializable;
 

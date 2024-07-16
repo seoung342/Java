@@ -1,4 +1,4 @@
-package project1_2;
+package project2Swing;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,7 +15,7 @@ public class Project1 {
 	public static void main(String[] args) {
 		List<Member> list = null;
 
-		try (FileInputStream fis = new FileInputStream("c:\\_dev\\eclipse\\JAVA0715\\src\\project1_2\\members.dat");
+		try (FileInputStream fis = new FileInputStream("c:\\_dev\\eclipse\\JAVA0716\\src\\project2Swing\\members.dat");
 	             ObjectInputStream ois = new ObjectInputStream(fis)) {
 			Member[] list2 = (Member[]) ois.readObject();
 			list = new ArrayList<>(Arrays.asList(list2));   // 배열을 ArrayList로
@@ -107,7 +107,7 @@ public class Project1 {
 				break;
 			case 4:
 				Member[] list2 = list.toArray(new Member[list.size()]); // ArrayList를 배열로
-				try (FileOutputStream fos = new FileOutputStream("c:\\_dev\\eclipse\\JAVA0715\\src\\project1_2\\members.dat");
+				try (FileOutputStream fos = new FileOutputStream("c:\\_dev\\eclipse\\JAVA0716\\src\\project2Swing\\members.dat");
 			             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 					 oos.writeObject(list2);
 			         System.out.println("객체를 파일에 저장했습니다.");

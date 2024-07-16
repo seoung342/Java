@@ -18,7 +18,9 @@ public class MainPage {
 		
 		int num = 0;
 		int x = 0;
-		
+		int total = 0;
+		int count = 0;
+		double avg = 0.0;
 		
 		try(FileInputStream fis = new FileInputStream("c:\\_dev\\eclipse\\Practice\\src\\project1\\Stock.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis)){
@@ -68,8 +70,12 @@ public class MainPage {
 				for(int i = 0; i < 30; i++) {
 					if(stock[i] != null) {
 						stock[i].getInfo();
+						total += stock[i].getPrice() * stock[i].getAmount();
+						count++;
 					}
 				}
+				System.out.println("총 구매 금액 : "+total);
+				
 				break;
 			case 4: // 종료
 				try(FileOutputStream fos = new FileOutputStream("c:\\_dev\\eclipse\\Practice\\src\\project1\\Stock.dat");
