@@ -1,6 +1,6 @@
 package project1;
 
-public class Stock {
+public class Stock implements java.io.Serializable{
 	String ticker;
 	double price;
 	double amount;
@@ -24,6 +24,8 @@ public class Stock {
 		this.amount = amount;
 	}
 	
-	
+	public void getInfo() {
+		System.out.println("Stock [ticker=" + ticker + ", price=" + price + ", amount=" + amount + "]");
+	}
 	
 }
