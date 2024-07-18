@@ -117,6 +117,7 @@ public class MyFrame extends JFrame{
 		this.setVisible(true);
 	}
 
+	// 로그인
 	class LoginListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {

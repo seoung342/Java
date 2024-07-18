@@ -2,12 +2,18 @@ package exam02;
 
 public class Main {
 	public static void main(String[] args) {
-		Person p = new Person();
 		Driver driver = new Driver();
-		Worker worker = new Worker();
+		Role role = driver;
+		role.doIt();
 		
-		p.setRole(worker);
+		role = new Worker();
+		if (role instanceof Worker) {
+			Worker worker = (Worker) role;
+		}
+		Person p = new Person();
+		p.setRole(new Driver());
 		p.doIt();
-		
+		p.setRole(new Worker());
+		p.doIt();
 	}
 }
