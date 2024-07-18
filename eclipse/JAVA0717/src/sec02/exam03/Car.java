@@ -7,16 +7,16 @@ public class Car {
 	Tire backLeftTire = new Tire("뒤왼쪽", 3);
 	Tire backRightTire = new Tire("뒤오른쪽", 4);
 	
-	int run() {
+	TireLoc run() {
 		System.out.println("[자동차가 달립니다.]");
-		if(frontLeftTire.roll()==false) {stop(); return 1;}
-		if(frontRightTire.roll()==false) {stop(); return 2;}
-		if(backLeftTire.roll()==false) {stop(); return 3;}
-		if(backRightTire.roll()==false) {stop(); return 4;}
-		return 0;
+		if(frontLeftTire.roll()==false) {stop(); return TireLoc.FrontLeftTire;}
+		if(frontRightTire.roll()==false) {stop(); return TireLoc.FrontRightTire;}
+		if(backLeftTire.roll()==false) {stop(); return TireLoc.BackLeftTire;}
+		if(backRightTire.roll()==false) {stop(); return TireLoc.BackRightTire;}
+		return TireLoc.NoProblem;
 	}
 	
 	void stop() {
-		System.out.println("[자동차가 멈춥니다.");
+		System.out.println("[자동차가 멈춥니다.]");
 	}
 }
