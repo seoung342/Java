@@ -134,12 +134,11 @@ public class MyFrame extends JFrame{
 					tf2.setVisible(false);
 					tf3.setVisible(false);
 					break;
+				}else if(!member2.getName().equals(name) && member2.getSsn().equals(strPassword)){
+					ta.setText("아이디를 다시 입력하세요");
 				}else if(member2.getName().equals(name) && !member2.getSsn().equals(strPassword)){
 					ta.setText("비밀 번호를 다시 입력하세요");
-				}
-				else if(!member2.getName().equals(name) && member2.getSsn().equals(strPassword)){
-					ta.setText("아이디를 다시 입력하세요");
-				}else {
+				}else if(!member2.getName().equals(name) && !member2.getSsn().equals(strPassword)){
 					ta.setText("다시 로그인 하세요.");
 				}
 			}

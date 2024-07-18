@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,143 +16,143 @@ import javax.swing.JTextField;
 public class Main extends JFrame{
 	
 	JLabel la = new JLabel("계산기");
-	JTextField jt = new JTextField(10);
+	JTextField jt1 = new JTextField(15);
+	JTextField jt2 = new JTextField(15);
 	JButton[] jb = new JButton[20];
 	JPanel[] jp = new JPanel[3];
+	String[] list = {"C","%","/","<==",
+						"7","8","9","*",
+						"4","5","6","-",
+						"1","2","3","+",
+						"+/-","0",".","="};
+	
+	String num1, num2, mark;
+	double result = 0.0;
+	boolean dotClicked = false;
 	
 	public Main() {
 		// 컨테이너 설정
-		OptionContainer2();
-	}
-	
-	private void OptionContainer1() {
-		Container con = this.getContentPane();
-		con.setLayout(null);
-		
-		con.add(la);
-		la.setLocation(207, -10);
-		la.setSize(100, 100);
-		
-		con.add(jt);
-		jt.setLocation(25, 70);
-		jt.setSize(415, 30);
-		
-		// 버튼 생성
-		for (int i =0; i<20; i++) {
-			String num = String.valueOf(i);
-			jb[i] = new JButton(num);
-			System.out.println(jb[i].getText());
-			con.add(jb[i]);
-		}
-		
-		// 버튼 위치
-		jb[0].setLocation(25,120); // ( x 좌표, y 좌표)
-		jb[0].setSize(100,50);
-		jb[1].setLocation(130,120); // ( x 좌표, y 좌표)
-		jb[1].setSize(100,50);
-		jb[2].setLocation(235,120); // ( x 좌표, y 좌표)
-		jb[2].setSize(100,50);
-		jb[3].setLocation(340,120); // ( x 좌표, y 좌표)
-		jb[3].setSize(100,50);
-		jb[4].setLocation(25,175); // ( x 좌표, y 좌표)
-		jb[4].setSize(100,50);
-		jb[5].setLocation(130,175); // ( x 좌표, y 좌표)
-		jb[5].setSize(100,50);
-		jb[6].setLocation(235,175); // ( x 좌표, y 좌표)
-		jb[6].setSize(100,50);
-		jb[7].setLocation(340,175); // ( x 좌표, y 좌표)
-		jb[7].setSize(100,50);
-		jb[8].setLocation(25,230); // ( x 좌표, y 좌표)
-		jb[8].setSize(100,50);
-		jb[9].setLocation(130,230); // ( x 좌표, y 좌표)
-		jb[9].setSize(100,50);
-		jb[10].setLocation(235,230); // ( x 좌표, y 좌표)
-		jb[10].setSize(100,50);
-		jb[11].setLocation(340,230); // ( x 좌표, y 좌표)
-		jb[11].setSize(100,50);
-		jb[12].setLocation(25,285); // ( x 좌표, y 좌표)
-		jb[12].setSize(100,50);
-		jb[13].setLocation(130,285); // ( x 좌표, y 좌표)
-		jb[13].setSize(100,50);
-		jb[14].setLocation(235,285); // ( x 좌표, y 좌표)
-		jb[14].setSize(100,50);
-		jb[15].setLocation(340,285); // ( x 좌표, y 좌표)
-		jb[15].setSize(100,50);
-		con.add(jb[16]);
-		jb[16].setLocation(25,340); // ( x 좌표, y 좌표)
-		jb[16].setSize(100,50);
-		con.add(jb[17]);
-		jb[17].setLocation(130,340); // ( x 좌표, y 좌표)
-		jb[17].setSize(100,50);
-		con.add(jb[18]);
-		jb[18].setLocation(235,340); // ( x 좌표, y 좌표)
-		jb[18].setSize(100,50);
-		con.add(jb[19]);
-		jb[19].setLocation(340,340); // ( x 좌표, y 좌표)
-		jb[19].setSize(100,50);
-		
-		this.setTitle("안녕 스윙");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocation(700,  300);
-		this.setSize(480, 450);
-		this.setVisible(true);
+		OptionContainer();
+		// 버튼 연결
+		ButtonClick();
 		
 	}
-	
-	private void OptionContainer2() {
+	// 컨테이너 설정
+	private void OptionContainer() {
 		
 		Container con = this.getContentPane();
 		con.setLayout(new BorderLayout());
 		
 		for (int i = 0; i < 3; i++) {
 			jp[i] = new JPanel();
-			jp[i].setLayout(new FlowLayout());
 		}
 		
+		jp[0].setLayout(new FlowLayout());
+		jp[1].setLayout(new GridLayout(2,1));
 		jp[2].setLayout(new GridLayout(5,4,2,2));
 		con.add(jp[0], BorderLayout.NORTH);
 		con.add(jp[1], BorderLayout.CENTER);
 		con.add(jp[2], BorderLayout.SOUTH);
 		
+		jp[0].add(la);	// 판넬에 레이블 넣기
+		jp[1].add(jt1);// 판넬에 텍스트 필드 넣기
+		jp[1].add(jt2);	// 판넬에 텍스트 필드 넣기
+		jt1.setHorizontalAlignment(JTextField.RIGHT);
+		jt2.setHorizontalAlignment(JTextField.RIGHT);
 		
-		jp[0].add(la);
-		jp[1].add(jt);
-		
+		// 판낼에 버튼 넣기
 		for(int i = 0; i <20; i++) {
-			String num = String.valueOf(i);
-			jb[i] = new JButton(num);
+			jb[i] = new JButton(list[i]);
 			jp[2].add(jb[i]);
 		}
 		
-		
-		
-		this.setTitle("안녕 스윙");
+		this.setTitle("계산기");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(700,  300);
 		this.setSize(250, 300);
 		this.setVisible(true);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// 버튼 모음
+	private void ButtonClick() {
+		for(int i = 0; i < 20; i++) {
+			jb[i].addActionListener(new ClickEvent());
+		}
+	}
+	// 버튼 클릭 이벤트 
+	class ClickEvent implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			switch(e.getActionCommand()) {
+				case "0": jt2.setText(jt2.getText()+"0"); break;
+				case "1": jt2.setText(jt2.getText()+"1"); break;
+				case "2": jt2.setText(jt2.getText()+"2"); break;
+				case "3": jt2.setText(jt2.getText()+"3"); break;
+				case "4": jt2.setText(jt2.getText()+"4"); break;
+				case "5": jt2.setText(jt2.getText()+"5"); break;
+				case "6": jt2.setText(jt2.getText()+"6"); break;
+				case "7": jt2.setText(jt2.getText()+"7"); break;
+				case "8": jt2.setText(jt2.getText()+"8"); break;
+				case "9": jt2.setText(jt2.getText()+"9"); break;
+				case "C": jt1.setText(null); jt2.setText(null); dotClicked = false; break;
+				case "%": num1 = jt2.getText(); mark = "%"; jt1.setText(jt2.getText() + " % "); jt2.setText(null); dotClicked = false; break;
+				case "/": num1 = jt2.getText(); mark = "/"; jt1.setText(jt2.getText() + " / "); jt2.setText(null); dotClicked = false; break;
+				case "*": num1 = jt2.getText(); mark = "*"; jt1.setText(jt2.getText() + " * "); jt2.setText(null); dotClicked = false; break;
+				case "-": num1 = jt2.getText(); mark = "-"; jt1.setText(jt2.getText() + " - "); jt2.setText(null); dotClicked = false; break;
+				case "+": num1 = jt2.getText(); mark = "+"; jt1.setText(jt2.getText() + " + "); jt2.setText(null); dotClicked = false; break;
+				case ".": 
+					if (!dotClicked) {
+                    jt2.setText(jt2.getText() + ".");
+                    dotClicked = true;
+                }
+                break;
+				case "=": 
+					num2 = jt2.getText(); 
+					jt1.setText(jt1.getText() + jt2.getText());
+					Calculation();
+					jt2.setText(String.valueOf(result));
+					dotClicked = false;
+					break;
+				case "+/-":
+					String currentText = jt2.getText();
+	                if (currentText.startsWith("-")) {
+	                    jt2.setText(currentText.substring(1));
+	                } else {
+	                    jt2.setText("-" + currentText);
+	                }
+	                break;
+				case "<==":
+					 String text = jt2.getText();
+	                    if (text.length() > 0) {
+	                        jt2.setText(text.substring(0, text.length() - 1));
+	                    }
+	                    break;
+			}
+			
+		}
+	}
+	// 사칙 연산
+	private void Calculation() {
+		switch(mark) {
+		case "%":
+			result = Double.parseDouble(num1) % Double.parseDouble(num2);
+			break;
+		case "/":
+			result = Double.parseDouble(num1) / Double.parseDouble(num2);
+			break;
+		case "*":
+			result = Double.parseDouble(num1) * Double.parseDouble(num2);
+			break;
+		case "-":
+			result = Double.parseDouble(num1) - Double.parseDouble(num2);
+			break;
+		case "+":
+			result = Double.parseDouble(num1) + Double.parseDouble(num2);
+			break;
+		}
+	}
 	
 	
 	public static void main(String[] args) {
 		new Main();
 	}
-	
-	
 }
