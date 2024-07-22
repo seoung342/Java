@@ -1,4 +1,6 @@
-package project4;
+// MySql workbench의 root에 저장 되있음
+// 쿼리문을 입력받아 결과를 출력하기
+package swingJdbc;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -11,43 +13,54 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class JdbcSelectExample extends JFrame {
+public class ViewDept extends JFrame{
+	JTextField tf = new JTextField(20);
+	JButton bt = new JButton("조회");
+	JTextArea ta = new JTextArea(17, 40);
+	Connection conn;
+	Statement stmt;
+	JFrame jf;
 	
-	JLabel la = new JLabel("select문 입력");
-	JTextField tf = new JTextField(35);
-	JButton jb = new JButton("실행");
-	JTextArea ta = new JTextArea(20,50);
-	JPanel jp1 = new JPanel();
-	JPanel jp2 = new JPanel();
-	
-	JdbcSelectExample(){
+	ViewDept(){
+		jf = this;
+		StartDB();
 		Option();
-		jb.addActionListener(new Execute());
+		
+		bt.addActionListener(new Execute() );
+	}
+	
+	private void StartDB() {
+		String url = "jdbc:mysql://localhost:3307/spring5fs";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, "root", "mysql");
+            stmt = conn.createStatement();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	private void Option() {
 		Container con = this.getContentPane();
 		con.setLayout(new BorderLayout());
+		JPanel jp1 = new JPanel(new FlowLayout());
+		jp1.add(tf); jp1.add(bt);
 		con.add(jp1, BorderLayout.NORTH);
+		JPanel jp2 = new JPanel(new FlowLayout());
+		jp2.add(ta);
 		con.add(jp2, BorderLayout.CENTER);
 		
-		jp1.setLayout(new FlowLayout());
-		jp1.add(la);jp1.add(tf);jp1.add(jb);
 		
-		jp2.setLayout(new FlowLayout());
-		jp2.add(ta);
-		
-		this.setTitle("정보 확인");
-		this.setBounds(800, 100, 800, 500);
+		this.setTitle("view Dept 테이블");
+		this.setBounds(1200, 200, 500, 400);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -57,27 +70,15 @@ public class JdbcSelectExample extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			StringBuilder sb = new StringBuilder();
 	        String sql = tf.getText();
-
-	        String url = "jdbc:mysql://localhost:3306/spring5fs";
-	        String user = "root";
-	        String password = "1234";
-
 	        try {
-	            Class.forName("com.mysql.cj.jdbc.Driver");
-	            System.out.println("MySQL JDBC driver loaded successfully.");
-
-	            Connection conn = DriverManager.getConnection(url, user, password);
-	            System.out.println("Connected to the MySQL server successfully.");
-
-	            Statement stmt = conn.createStatement();
 	            ResultSet rs = stmt.executeQuery(sql);
-	            
 	            ResultSetMetaData rsmd = rs.getMetaData();
 	            int columnsNumber = rsmd.getColumnCount();
 	            for(int i = 1; i<= columnsNumber; i++) {
             		sb.append(rsmd.getColumnName(i)+"\t");
             	}
 	            sb.append("\n");
+	           
 	            while (rs.next()) {
 	            	for (int i = 1; i <= columnsNumber; i++) { 
 	                    sb.append(rs.getString(i)+"\t");
@@ -85,44 +86,17 @@ public class JdbcSelectExample extends JFrame {
 	            	sb.append("\n");
 	                ta.setText(sb.toString());
 	            }
-
-	            rs.close();
-	            stmt.close();
-	            conn.close();
-	        } catch (ClassNotFoundException e1) {
-	            System.out.println("MySQL JDBC Driver not found.");
+	        } catch (SQLException e1) {
+	        	JOptionPane.showMessageDialog(jf, "쿼리문을 다시 입력하세요","정보",JOptionPane.INFORMATION_MESSAGE);
 	            e1.printStackTrace();
-	        } catch (SQLException e2) {
-	            System.out.println("Database connection or query execution failed.");
-	            e2.printStackTrace();
 	        }
-			
 		}
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public static void main(String[] args) {
-		new JdbcSelectExample();
+		new ViewDept();
 
-    }
+	}
+
 }

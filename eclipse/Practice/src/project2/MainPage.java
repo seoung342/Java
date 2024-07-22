@@ -7,7 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import project2.User;
-import project3.Member;
 
 public class MainPage {
 	public static void main(String[] args) {
@@ -23,7 +22,7 @@ public class MainPage {
 		String myPass = ""; // 내 비밀번호
 		String str = ""; // 빈 객체
 		
-		try(FileInputStream fis = new FileInputStream("c:\\_dev\\eclipse\\Practice\\src\\project2\\User.dat");
+		try(FileInputStream fis = new FileInputStream("c:\\_dev\\eclipse\\Practice\\src\\project2\\User.dat");// 경로는 자신이 편한곳으로 정하기
 				ObjectInputStream ois = new ObjectInputStream(fis)){
 			
 			user = (User[]) ois.readObject();
@@ -178,7 +177,7 @@ public class MainPage {
 				}
 				break;
 			case 5: // 종료
-				try(FileOutputStream fos = new FileOutputStream("c:\\_dev\\eclipse\\Practice\\src\\project2\\User.dat");
+				try(FileOutputStream fos = new FileOutputStream("c:\\_dev\\eclipse\\Practice\\src\\project2\\User.dat"); // 경로는 자신이 편한곳으로 정하기
 						ObjectOutputStream oos = new ObjectOutputStream(fos)){
 					
 					oos.writeObject(user);
