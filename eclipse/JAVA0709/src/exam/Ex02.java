@@ -7,7 +7,6 @@ public class Ex02 {
 	   사과를 똑같이 나눠 먹으면 몇개의 사과가 남을까요? (Scanner 사용해서 입력 받기 )
 	*/
 	public static void main(String[] args) {
-		
 		Scanner scan = new Scanner(System.in);
 		
 		int apple = getCount("사과의 개수 : ", scan);
