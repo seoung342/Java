@@ -22,6 +22,11 @@ public class Student {
 	public int getJava() {
 		return java;
 	}
+
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", hakbun=" + hakbun + ", java=" + java + "]";
+	}
 	
 	
 
