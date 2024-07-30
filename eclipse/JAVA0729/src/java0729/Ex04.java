@@ -14,7 +14,7 @@ public class Ex04 {
 		System.out.println(strNow);
 		
 		LocalDateTime now1 = LocalDateTime.now();
-		String strNow1 = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(now1);
+		String strNow1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss").format(now1);
 		System.out.println(strNow1);
 	}
 }
