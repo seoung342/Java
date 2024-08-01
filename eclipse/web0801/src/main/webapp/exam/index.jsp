@@ -59,7 +59,7 @@ if(cookies != null){
         <h1>Welcome to My JSP Homepage</h1>
     </header>
     <nav>
-        <a href="#">Home</a>
+        <a href="home.jsp">게시판</a>
         <a href="#">About</a>
 <%
     if (username != null){

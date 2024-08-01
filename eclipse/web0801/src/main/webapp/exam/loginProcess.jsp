@@ -17,20 +17,20 @@
 	boolean flag = dao.getCheck(username, password);
 	
 	if (flag) {
-       out.println("<h2>Login 성공! Welcome, " + username + ".</h2>");
-       // 로그인 성공, 쿠키 설정
-       Cookie loginCookie = new Cookie("username", username);
-       loginCookie.setMaxAge(60 * 60); // 1시간
-       response.addCookie(loginCookie);
-       out.println("<script tpye = 'text/javascript'>");
-       out.println("alert('환영합니다, " + username + "!')");
-       out.println("window.location.href = 'index.jsp';");
-       out.println("</script>");
+		out.println("<h2>Login 성공! Welcome, " + username + ".</h2>");
+        // 로그인 성공, 쿠키 설정
+        Cookie loginCookie = new Cookie("username", username);
+        loginCookie.setMaxAge(60 * 60); // 1시간
+        response.addCookie(loginCookie);
+        out.println("<script tpye = 'text/javascript'>");
+        out.println("alert('환영합니다, " + username + "!')");
+        out.println("window.location.href = 'index.jsp';");
+        out.println("</script>");
     } else {
-   	out.println("<script tpye = 'text/javascript'>");
-       out.println("alert('로그인 실패')");
-       out.println("window.location.href = 'index.jsp';");
-       out.println("</script>");
+		out.println("<script tpye = 'text/javascript'>");
+        out.println("alert('로그인 실패')");
+        out.println("window.location.href = 'index.jsp';");
+        out.println("</script>");
     }
 
 %>
