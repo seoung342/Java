@@ -70,7 +70,7 @@ if (rs.next()) {
 <input type="button" value="수정"
        onclick="location.href='write2.jsp?num=<%=num%>'">
 <input type="button" value="삭제"
-       onclick="location.href='delete.jsp?num=2'">
+       onclick="location.href='delete.jsp?num=<%=num%>'">
 
 </body>
 </html>
