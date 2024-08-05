@@ -119,7 +119,6 @@
                     <li><a href="#">Sitemap</a></li>
                 </ul>
             </div>
-
             <div class="lower">
                 <address>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, facere.<br>
