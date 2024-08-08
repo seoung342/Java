@@ -9,7 +9,7 @@ Connection con = null;
 PreparedStatement pstmt = null;
 Class.forName("com.mysql.cj.jdbc.Driver");
 String URL = "jdbc:mysql://localhost:3307/spring5fs";
-String sql = "Select * from dept where loc = ?";
+String sql = "Select * from dept";
 con = DriverManager.getConnection(URL,"root","mysql");
 pstmt = con.prepareStatement(sql);
 
@@ -26,7 +26,6 @@ pstmt = con.prepareStatement(sql);
 <input type = "submit" value = "검색">
 </form><br><br>
 <%
-	pstmt.setString(1, request.getParameter("loc"));
 	ResultSet rs = pstmt.executeQuery();
 %>
 <table border="1">
