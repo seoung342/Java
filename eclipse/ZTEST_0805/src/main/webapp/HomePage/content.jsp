@@ -6,7 +6,6 @@
 <%
 	ContentDAO dao = new ContentDAO();
 	List<ContentDTO> list = dao.getContentList();
-	
 	request.setAttribute("contentList", list);
 %>
 
