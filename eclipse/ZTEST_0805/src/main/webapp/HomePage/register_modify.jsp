@@ -5,13 +5,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String delete = request.getParameter("delete");
+	if(delete != null){
+		AccountDAO dao = new AccountDAO();
+		dao.getDelete(new AccountDTO(Integer.parseInt(delete),"","","",""));
+	}
 	
 	AccountDAO dao = new AccountDAO();
 	List<AccountDTO> list = dao.getAccountList();
-
-	if(delete != null){
-		dao.getDelete(new AccountDTO(Integer.parseInt(delete),"","","",""));
-	}
+	
+	request.setAttribute("accountList", list);
 %>
 <!DOCTYPE html>
 <html>
@@ -114,26 +116,20 @@ input[type="button"]:hover {
 			        <th class="tel">전화번호</th>
 			        <th class="check">삭제</th>
 			    </tr>
-			<%
-			for(AccountDTO dto : list) {
-			%>
-				<tr>
-			        <td><%=dto.getNum() %></td>
-			        <td><%=dto.getId() %></td>
-			        <td><%=dto.getPw() %></td>
-			        <td><%=dto.getName() %></td>
-			        <td><%=dto.getTel() %></td>
-			        <%
-			        if(dto.getNum() != 1){
-			        %>
-			        <td><button type="button" onclick="location.href='?delete=<%=dto.getNum()%>' ">삭제</button></td>
-			        <%
-			        }
-			        %>
-			    </tr>
-			<%
-			}
-			%>
+				<c:forEach var="dto" items="${accountList}">
+                    <tr>
+                        <td>${dto.num}</td>
+                        <td>${dto.id}</td>
+                        <td>${dto.pw}</td>
+                        <td>${dto.name}</td>
+                        <td>${dto.tel}</td>
+                        <c:if test="${dto.num != 1}">
+                            <td>
+                                <button type="button" onclick="location.href='?delete=${dto.num}'">삭제</button>
+                            </td>
+                        </c:if>
+                    </tr>
+                </c:forEach>
 			</table>
 		</div>
     </section>

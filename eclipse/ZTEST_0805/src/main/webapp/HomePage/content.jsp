@@ -6,6 +6,8 @@
 <%
 	ContentDAO dao = new ContentDAO();
 	List<ContentDTO> list = dao.getContentList();
+	
+	request.setAttribute("contentList", list);
 %>
 
 <!DOCTYPE html>
@@ -106,21 +108,17 @@ input[type="button"]:hover {
 		        <th class="regtime">작성일시</th>
 		        <th                >조회수  </th>
 		    </tr>
-<%
-for(ContentDTO dto : list) {
-%>
-		    <tr>
-		        <td><%=dto.getNum() %></td>
-		        <td style="text-align:left;">
-		            <a href="content_view.jsp?num=<%=dto.getNum() %>"><%=dto.getTitle() %></a>
-		        </td>
-		        <td><%=dto.getWriter() %></td>
-		        <td><%=dto.getRegtime() %></td>
-		        <td><%=dto.getHits() %></td>
-		    </tr>
-<%
-}
-%>
+				<c:forEach var="dto" items="${contentList}">
+                    <tr>
+                        <td>${dto.num}</td>
+                        <td style="text-align:left;">
+                            <a href="content_view.jsp?num=${dto.num}">${dto.title}</a>
+                        </td>
+                        <td>${dto.writer}</td>
+                        <td>${dto.regtime}</td>
+                        <td>${dto.hits}</td>
+                    </tr>
+                </c:forEach>
 			</table>
 			<c:if test="${id != null }">
 				<input type="button" value="글쓰기" onclick="location.href='content_write.jsp'">

@@ -8,6 +8,8 @@
 	int num = Integer.parseInt(request.getParameter("num"));
 	ContentDAO dao = new ContentDAO();
 	ContentDTO dto = dao.getOne(num);
+	
+	request.setAttribute("dto", dto);
 %>
 <!DOCTYPE html>
 <html>
@@ -117,34 +119,34 @@
 		    <table>
 			    <tr>
 			        <th>제목</th>
-			        <td><%= dto.getTitle()%></td>
+			        <td>${dto.title}</td>
 			    </tr>
 			    <tr>
 			        <th>작성자</th>
-			        <td><%=dto.getWriter() %></td>
+			        <td>${dto.writer}</td>
 			    </tr>
 			    <tr>
 			        <th>작성일시</th>
-			        <td><%=dto.getRegtime() %></td>
+			        <td>${dto.regtime}</td>
 			    </tr>
 			    <tr>
 			        <th>조회수</th>
-			        <td><%=dto.getHits() %></td>
+			        <td>${dto.hits}</td>
 			    </tr>
 			    <tr>
 			        <th>내용</th>
-			        <td><%=dto.getContent() %></td>
+			        <td>${dto.content}</td>
 			    </tr>
 			</table>
 			<br>
 			<input type="button" value="이전 페이지" onclick="location.href='content.jsp'">
 			<c:choose>
-				<c:when test="${id != null && name eq 'dto.getWriter()'}">
-	   				<input type="button" value="수정" onclick="location.href='content_fix.jsp?num=<%=dto.getNum()%>'">
-					<input type="button" value="삭제" onclick="location.href='content_delete.jsp?num=<%=dto.getNum()%>'">
+				<c:when test="${id != null && name eq dto.writer}">
+	   				<input type="button" value="수정" onclick="location.href='content_fix.jsp?num=${dto.num}'">
+					<input type="button" value="삭제" onclick="location.href='content_delete.jsp?num=${dto.num}'">
 				</c:when>
 				<c:when test="${id != null && id eq 'root'}">
-					<input type="button" value="삭제" onclick="location.href='content_delete.jsp?num=<%=dto.getNum()%>'">
+					<input type="button" value="삭제" onclick="location.href='content_delete.jsp?num=${dto.num}'">
       			</c:when>
       		</c:choose>
 		   </div>

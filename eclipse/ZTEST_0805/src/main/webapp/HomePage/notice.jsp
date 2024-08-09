@@ -7,7 +7,8 @@
 	request.setCharacterEncoding("UTF-8");
 	NoticeDAO dao = new NoticeDAO();
 	List<NoticeDTO> list = dao.getNoticeList();
-
+	
+	request.setAttribute("noticeList", list);	
 %>
 
 <!DOCTYPE html>
@@ -113,21 +114,17 @@ input[type="button"]:hover {
 		        <th class="regtime">작성일시</th>
 		        <th                >조회수  </th>
 		    </tr>
-<%
-for(NoticeDTO dto : list) {
-%>
-		    <tr>
-		        <td><%=dto.getNum() %></td>
-		        <td style="text-align:left;">
-		            <a href="notice_view.jsp?num=<%=dto.getNum() %>"><%=dto.getTitle() %></a>
-		        </td>
-		        <td><%=dto.getWriter() %></td>
-		        <td><%=dto.getRegtime() %></td>
-		        <td><%=dto.getHits() %></td>
-		    </tr>
-<%
-}
-%>
+				<c:forEach var="dto" items="${noticeList}">
+                    <tr>
+                        <td>${dto.num}</td>
+                        <td style="text-align:left;">
+                            <a href="notice_view.jsp?num=${dto.num}">${dto.title}</a>
+                        </td>
+                        <td>${dto.writer}</td>
+                        <td>${dto.regtime }</td>
+                        <td>${dto.hits}</td>
+                    </tr>
+                </c:forEach>
 			</table>
 			<c:if test="${ id != null && id eq 'root'}">
 				<input type="button" value="글쓰기" onclick="location.href='notice_write.jsp'">

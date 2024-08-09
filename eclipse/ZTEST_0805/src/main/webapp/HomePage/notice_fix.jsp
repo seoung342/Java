@@ -6,6 +6,8 @@
 	int num = Integer.parseInt(request.getParameter("num"));
 	NoticeDAO dao = new NoticeDAO();
 	NoticeDTO dto = dao.getOne(num);
+	
+	request.setAttribute("dto", dto);
 %>
 
 <!DOCTYPE html>
@@ -114,14 +116,14 @@
      <section>
         <div class="inner">
 	<form method="post" action="notice_update.jsp">
-		<input type="hidden" name="num" value="<%=dto.getNum()%>">
-		<input type="hidden" name="hits" value="<%=dto.getHits() %>">
-		<input type="hidden" name="writer" value="<%=dto.getWriter()%>">
+		<input type="hidden" name="num" value="${dto.num }">
+		<input type="hidden" name="hits" value="${dto.hits }">
+		<input type="hidden" name="writer" value="${dto.writer }">
 	    <table>
 	        <tr>
 	            <th>제목</th>
 	            <td><input type="text" name="title"  maxlength="255"
-	                       value="<%=dto.getTitle()%>">
+	                       value="${dto.title }">
 	            </td>
 	        </tr>
 	        <tr>
@@ -130,7 +132,7 @@
 	        </tr>
 	        <tr>
 	            <th>내용</th>
-	            <td><textarea name="content" rows="10"><%=dto.getContent() %></textarea>
+	            <td><textarea name="content" rows="10">${dto.content }</textarea>
 	            </td>
 	        </tr>
 	    </table>
