@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ContentMapper">
+    <select id="selectAllContent" resultType="home.Content">
+        SELECT * FROM test_content order by num desc
+    </select>
+
+    <select id="selectContentOne" parameterType="int" resultType="home.Content">
+        SELECT * FROM test_content WHERE num = #{num}
+    </select>
+
+    <insert id="insertContent" parameterType="home.Content">
+        INSERT INTO test_content (writer, title, content, regtime, hits)
+        VALUES (#{writer}, #{title}, #{content}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 0)
+    </insert>
+
+    <update id="updateContent" parameterType="home.Content">
+        UPDATE test_content
+        SET writer = #{writer}, title = #{title}, content = #{content}, regtime = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') 
+        WHERE num = #{num}
+    </update>
+
+    <delete id="deleteContent" parameterType="int">
+        DELETE FROM test_content WHERE num = #{num}
+    </delete>
+    
+    <update id="updateHits" parameterType="home.Notice">
+    	update test_content set hits = #{hits} where num = #{num}
+    </update>
+    
+    
+    
+</mapper>

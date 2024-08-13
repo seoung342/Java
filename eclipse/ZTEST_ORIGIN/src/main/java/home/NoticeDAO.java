@@ -24,7 +24,7 @@ public class NoticeDAO {
 		return session.selectList("NoticeMapper.selectAllNotice");
 	}
 
-	public void addNotice(Notice notice) {
+	public void insertNotice(Notice notice) {
 		session.insert("NoticeMapper.insertNotice", notice);
 	}
 

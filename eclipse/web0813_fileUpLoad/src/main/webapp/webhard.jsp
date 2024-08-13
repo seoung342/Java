@@ -1,7 +1,11 @@
+<%@page import="webhard.WebhardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>   
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%    
+WebhardDAO dao = new WebhardDAO();
+request.setAttribute("list", dao.getAllWebhard());
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,34 +38,18 @@
         <th>삭제       </th>
     </tr>
     
-<%    
-    Class.forName("com.mysql.cj.jdbc.Driver");
-    try ( 
-        Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3307/spring5fs", "root", "mysql");
-        Statement stmt = conn.createStatement();
-            
-        ResultSet rs = stmt.executeQuery("select * from webhard");
-    ) {
-        while (rs.next()) {
-%>    
+<c:forEach var="dto" items="${list}">   
         <tr>
             <td class="left">
-                <a href="files/<%=rs.getString("fname")%>">
-                    <%=rs.getString("fname")%>
+                <a href="files/${dto.fname}">
+                    ${dto.fname}
                 </a>
             </td>
-            <td><%=rs.getString("ftime")%></td>
-            <td class="right"><%=rs.getInt("fsize")%>&nbsp;&nbsp;</td>
-            <td><a href="del_file.jsp?num=<%=rs.getInt("num")%>">X</a></td>
+            <td>${dto.ftime}</td>
+            <td class="right">${dto.fsize}&nbsp;&nbsp;</td>
+            <td><a href="del_file.jsp?num=${dto.num}">X</a></td>
         </tr>
-<%    
-        }
-    } catch(Exception e) {
-        e.printStackTrace();
-    }
-%>    
+</c:forEach>
 </table>
-
 </body>
 </html>

@@ -8,7 +8,8 @@ request.setCharacterEncoding("UTF-8");
 
 int num = Integer.parseInt(request.getParameter("num"));
 ContentDAO dao = new ContentDAO();
-Content dto = dao.getOne(num);
+Content dto = dao.getContentByNum(num);
+dao.updateHits(dto.getNum(), dto.getHits()+1);
 
 request.setAttribute("dto", dto);
 %>

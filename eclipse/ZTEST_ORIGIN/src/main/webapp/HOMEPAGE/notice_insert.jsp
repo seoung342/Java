@@ -13,7 +13,7 @@ String content = request.getParameter("content");
 
 NoticeDAO dao = new NoticeDAO();
 Notice dto = new Notice(0,writer,title,content,"0",0);
-dao.addNotice(dto);
+dao.insertNotice(dto);
 
 response.sendRedirect("notice.jsp"); // 리다이렉트
 %>

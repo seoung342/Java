@@ -4,9 +4,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-int num = Integer.parseInt(request.getParameter("num"));
+	int num = Integer.parseInt(request.getParameter("num"));
 	ContentDAO dao = new ContentDAO();
-	Content dto = dao.getOne(num);
+	Content dto = dao.getContentByNum(num);
 	
 	request.setAttribute("dto", dto);
 %>

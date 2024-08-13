@@ -13,7 +13,7 @@ int hits = Integer.parseInt(request.getParameter("hits"));
 
 ContentDAO dao = new ContentDAO();
 Content dto = new Content(num,writer,title,content,"0",hits);
-dao.getUpdate(dto);
+dao.updateContent(dto);
 
 response.sendRedirect("content.jsp"); // 리다이렉트
 %>

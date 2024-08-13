@@ -1,10 +1,8 @@
-<%@page import="home.Account"%>
+<%@page import="home.AccountDTO"%>
 <%@page import="home.AccountDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-p
-
 request.setCharacterEncoding("UTF-8");
 
 String id = request.getParameter("id");
@@ -13,7 +11,7 @@ String name = request.getParameter("name");
 String tel = request.getParameter("tel");
 
 AccountDAO dao = new AccountDAO();
-Account dto = new Account(0, id, pw, name, tel);
+AccountDTO dto = new AccountDTO(0, id, pw, name, tel);
 dao.updateAccount(dto);
 
 if(String.valueOf(dto.getId()) != null){

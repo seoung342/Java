@@ -1,4 +1,4 @@
-<%@page import="home.Account"%>
+<%@page import="home.AccountDTO"%>
 <%@page import="home.AccountDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,13 +9,11 @@
 </head>
 <body>
 <%
-p
-
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	
 	AccountDAO dao = new AccountDAO();
-	Account dto = dao.getAccountOne(id, pw);
+	AccountDTO dto = dao.getAccountOne(id, pw);
 	boolean flag = dao.getCheck(id, pw);
 	
 	if (flag) {

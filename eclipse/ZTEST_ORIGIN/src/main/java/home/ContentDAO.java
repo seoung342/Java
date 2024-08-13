@@ -1,138 +1,51 @@
 package home;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
-import util.JDBCUtil;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import mybatis.SqlMapConfig;
 
 public class ContentDAO {
-	// JDBC 관련 변수 
-	private Connection conn = null;
-	private PreparedStatement stmt = null;
-	private ResultSet rs = null;
-	
-	private String CONTENT_LIST = "select * from test_content order by num desc";
-	private String CONTENT_ONE = "select * from test_content where num = ?";
-	private String CONTENT_INSERT = "insert into test_content (writer, title, content, regtime, hits) values (?, ?, ?, ?, 0)";
-	private String CONTENT_UPDATE = "update test_content set writer = ?, title = ?, content = ?, regtime = ? where num = ?";
-	private String CONTENT_UPDATE_HITS = "update test_content set hits = ? where num = ?";
-	private String CONTENT_DELETE = "delete from test_content where num = ?";
 
-	
-	//게시판 전체 목록 조회
-	public List<Content> getContentList() {
-		List<Content> list = new ArrayList<>();
-		
-		conn = JDBCUtil.getConnection();
-		try {
-			stmt = conn.prepareStatement(CONTENT_LIST);
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				Content dto = new Content(rs.getInt("num"), rs.getString("writer"),
-						rs.getString("title"), rs.getString("content"),
-						rs.getString("regtime"), rs.getInt("hits"));
-				list.add(dto);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(rs, stmt, conn);
-		}
-		
-		return list;
+	// SqlSessionFactory를 SqlMapConfig를 통하여 생성한다.
+	SqlSessionFactory sqlsession_f = SqlMapConfig.getSqlMapInstance();
+	SqlSession session;
+
+	public ContentDAO() {
+		// SqlSessionFactory에서 session을 할당받는다.
+		// 이 때 openSession에 true를 주어야 자동 커밋이 된다.
+		// default는 false이다.
+		session = sqlsession_f.openSession(true);
 	}
 
-	// 게시판 등록
-		public void insertContent(Content dto) {
-			conn = JDBCUtil.getConnection();
-			try {
-				// 현재 시간 가져오기
-		        LocalDateTime now = LocalDateTime.now();
-		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		        String nowFormatted = now.format(formatter);
-		        
-				stmt = conn.prepareStatement(CONTENT_INSERT);
-				stmt.setString(1, dto.getWriter());
-				stmt.setString(2, dto.getTitle());
-				stmt.setString(3, dto.getContent());
-				stmt.setString(4, nowFormatted);
-				stmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				JDBCUtil.close(stmt, conn);
-			}
-		}
-	
-	// 수정
-	public void getUpdate(Content dto) {
-		conn = JDBCUtil.getConnection();
-		try {
-			// 현재 시간 가져오기
-	        LocalDateTime now = LocalDateTime.now();
-	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-	        String nowFormatted = now.format(formatter);
-	        
-			stmt = conn.prepareStatement(CONTENT_UPDATE);
-			stmt.setString(1, dto.getWriter());
-			stmt.setString(2, dto.getTitle());
-			stmt.setString(3, dto.getContent());
-			stmt.setString(4, nowFormatted);
-			stmt.setInt(5, dto.getNum());
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			JDBCUtil.close(stmt, conn);
-		}
+	public List<Content> getAllContent() {
+		return session.selectList("ContentMapper.selectAllContent");
 	}
-		
-	// 게시판 조회
-	public Content getOne(int num) {
-		Content dto = null;
-		conn = JDBCUtil.getConnection();
-		try {
-			stmt = conn.prepareStatement(CONTENT_ONE);
-			stmt.setInt(1, num);
-			rs = stmt.executeQuery();
-			while (rs.next()) {
-				dto = new Content(rs.getInt("num"), rs.getString("writer"),
-						rs.getString("title"), rs.getString("content"),
-						rs.getString("regtime"), rs.getInt("hits"));
-			}
-			stmt = conn.prepareStatement(CONTENT_UPDATE_HITS);
-			stmt.setInt(1, dto.getHits()+1);
-			stmt.setInt(2, dto.getNum());
-			stmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			JDBCUtil.close(rs, stmt, conn);
-		}
-		
-		return dto;
+
+	public void insertContent(Content content) {
+		session.insert("ContentMapper.insertContent", content);
 	}
-	
-	// 목록 삭제
-	public void getDelete(Content dto) {
-		conn = JDBCUtil.getConnection();
-		try {
-			stmt = conn.prepareStatement(CONTENT_DELETE);
-			stmt.setInt(1, dto.getNum());
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			JDBCUtil.close(stmt, conn);
-		}
-	}	
-	
-	
+
+	public Content getContentByNum(int num) {
+		return session.selectOne("ContentMapper.selectContentOne", num);
+	}
+
+	public void updateContent(Content content) {
+		session.update("ContentMapper.updateContent", content);
+	}
+
+	public void updateHits(int num, int hits) {
+		Content content = new Content();
+		content.setNum(num);
+		content.setHits(hits);
+		session.update("ContentMapper.updateHits", content);
+	}
+
+	public void deleteContent(int num) {
+		session.delete("ContentMapper.deleteContent", num);
+	}
+
+
 }

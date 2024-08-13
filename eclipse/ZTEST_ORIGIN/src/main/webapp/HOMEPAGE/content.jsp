@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 ContentDAO dao = new ContentDAO();
-List<Content> list = dao.getContentList();
+List<Content> list = dao.getAllContent();
 request.setAttribute("contentList", list);
 %>
 

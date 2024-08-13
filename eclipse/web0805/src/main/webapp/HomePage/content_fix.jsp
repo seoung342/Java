@@ -1,5 +1,5 @@
 <%@page import="home.ContentDAO"%>
-<%@page import="home.Content"%>
+<%@page import="home.ContentDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -10,7 +10,7 @@ String id = (String)session.getAttribute("id");
 
 	int num = Integer.parseInt(request.getParameter("num"));
 	ContentDAO dao = new ContentDAO();
-	Content dto = dao.getOne(num);
+	ContentDTO dto = dao.getOne(num);
 %>
 
 <!DOCTYPE html>

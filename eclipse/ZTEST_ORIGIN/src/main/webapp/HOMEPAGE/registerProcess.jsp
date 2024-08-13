@@ -11,8 +11,7 @@ String tel = request.getParameter("tel");
 
 AccountDAO dao = new AccountDAO();
 Account dto = new Account(0, id, pw, name, tel);
-boolean flag = dao.getCheck(id, pw);
-
+boolean flag = dao.selectAccountCheck(id);
 
 if(flag){
 	out.println("<script tpye = 'text/javascript'>");

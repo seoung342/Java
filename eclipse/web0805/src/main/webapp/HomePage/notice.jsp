@@ -1,10 +1,9 @@
-<%@page import="home.Notice"%>
+<%@page import="home.NoticeDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="home.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-p
 
 	request.setCharacterEncoding("UTF-8");
 	
@@ -14,7 +13,7 @@ p
 	String tel = (String)session.getAttribute("tel");
 	
 	NoticeDAO dao = new NoticeDAO();
-	List<Notice> list = dao.getNoticeList();
+	List<NoticeDTO> list = dao.getNoticeList();
 %>
 
 <!DOCTYPE html>
@@ -93,13 +92,13 @@ input[type="button"]:hover {
                 <li><a href="content.jsp">게시판</a></li>
                 <li><a href="location.jsp">LOCATION</a></li>
             <%
-            p
+            
 
                         if ( id != null && id.equals("root")){
             %>
             	<li><a href="register_modify.jsp">회원 관리</a></li>
             <%
-            p
+            
 
                         }
             %>
@@ -107,22 +106,22 @@ input[type="button"]:hover {
 
             <ul class="util">
             <%
-            p
+            
 
                         if ( id != null){
             %>
-            	<li><a><%=t(nam%></a></li>
+            	<li><a><%=name%></a></li>
             	<li><a href="myinfo.jsp">내 정보</a>
             	<li><a href="logout.jsp">로그아웃</a></li>
             <%
-            p
+            
 
                         }else{
             %>
                 <li><a href="login.jsp">로그인</a></li>
                 <li><a href="register.jsp">회원가입</a></li>
             <%
-            p
+            
 
                         }
             %>
@@ -139,9 +138,9 @@ input[type="button"]:hover {
 		        <th                >조회수  </th>
 		    </tr>
 <%
-p
 
-for(Notice dto : list) {
+
+for(NoticeDTO dto : list) {
 %>
 		    <tr>
 		        <td><%=dto.getNum() %></td>

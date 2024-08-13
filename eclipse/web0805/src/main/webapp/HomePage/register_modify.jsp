@@ -1,11 +1,9 @@
 <%@page import="java.util.List"%>
-<%@page import="home.Account"%>
+<%@page import="home.AccountDTO"%>
 <%@page import="home.AccountDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-p
-
 	String id = (String)session.getAttribute("id");
 	String pw = (String)session.getAttribute("pw");
 	String name = (String)session.getAttribute("name");
@@ -14,10 +12,10 @@ p
 	String delete = request.getParameter("delete");
 	
 	AccountDAO dao = new AccountDAO();
-	List<Account> list = dao.getAccountList();
+	List<AccountDTO> list = dao.getAccountList();
 
 	if(delete != null){
-		dao.getDelete(new Account(Integer.parseInt(delete),"","","",""));
+		dao.getDelete(new AccountDTO(Integer.parseInt(delete),"","","",""));
 	}
 %>
 <!DOCTYPE html>
@@ -92,13 +90,13 @@ input[type="button"]:hover {
                 <li><a href="content.jsp">게시판</a></li>
                 <li><a href="location.jsp">LOCATION</a></li>
             <%
-            p
+            
 
                         if ( id != null && id.equals("root")){
             %>
             	<li><a href="register_modify.jsp">회원 관리</a></li>
             <%
-            p
+            
 
                         }
             %>
@@ -106,22 +104,22 @@ input[type="button"]:hover {
 
             <ul class="util">
             <%
-            p
+            
 
                         if ( id != null){
             %>
-            	<li><a><%=t(nam%></a></li>
+            	<li><a><%=name%></a></li>
             	<li><a href="myinfo.jsp">내 정보</a>
             	<li><a href="logout.jsp">로그아웃</a></li>
             <%
-            p
+            
 
                         }else{
             %>
                 <li><a href="login.jsp">로그인</a></li>
                 <li><a href="register.jsp">회원가입</a></li>
             <%
-            p
+            
 
                         }
             %>
@@ -140,9 +138,9 @@ input[type="button"]:hover {
 			        <th class="check">삭제</th>
 			    </tr>
 			<%
-			p
+			
 
-				for(Account dto : list) {
+				for(AccountDTO dto : list) {
 			%>
 				<tr>
 			        <td><%=dto.getNum() %></td>

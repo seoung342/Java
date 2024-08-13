@@ -18,5 +18,7 @@
 	<!-- 참조할 oracle이 작성될 xml파일의 위치를 지정해준다. -->
 	<mappers>
 		<mapper resource="mybatis/oracle/NoticeMapper.xml"/>
+		<mapper resource="mybatis/oracle/ContentMapper.xml"/>
+		<mapper resource="mybatis/oracle/AccountMapper.xml"/>
 	</mappers>
 </configuration>

@@ -4,14 +4,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-String delete = request.getParameter("delete");
+	String delete = request.getParameter("delete");
 	if(delete != null){
 		AccountDAO dao = new AccountDAO();
-		dao.getDelete(new Account(Integer.parseInt(delete),"","","",""));
+		dao.deleteAccount(delete);
 	}
 	
 	AccountDAO dao = new AccountDAO();
-	List<Account> list = dao.getAccountList();
+	List<Account> list = dao.selectAllAccount();
 	
 	request.setAttribute("accountList", list);
 %>

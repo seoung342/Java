@@ -3,31 +3,39 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="NoticeMapper">
-    <select id="selectAllNotice" resultType="home.Notice">
-        SELECT * FROM test_notice order by num desc
+<mapper namespace="AccountMapper">
+    <select id="selectAllAccount" resultType="home.Account">
+        SELECT * FROM test_account order by num
     </select>
 
-    <select id="selectNoticeOne" parameterType="int" resultType="home.Notice">
-        SELECT * FROM test_notice WHERE num = #{num}
+    <select id="selectAccountOne" parameterType="home.Account" resultType="home.Account">
+    	select * from test_account where id = #{id} and pw = #{pw}
+    </select>
+    
+    <select id="selectAccountCheck" parameterType="String" resultType="boolean">
+    	select count(*) from test_account where id = #{id}
     </select>
 
-    <insert id="insertNotice" parameterType="home.Notice">
-        INSERT INTO test_notice (writer, title, content, regtime, hits)
-        VALUES (#{writer}, #{title}, #{content}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 0)
+    <insert id="insertAccount" parameterType="home.Account">
+    	insert into test_account (id, pw, name, tel) 
+    	values (#{id}, #{pw},#{name},#{tel})
     </insert>
 
-    <update id="updateNotice" parameterType="home.Notice">
-        UPDATE test_notice
-        SET writer = #{writer}, title = #{title}, content = #{content}, regtime = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') 
-        WHERE num = #{num}
+    <update id="updateAccount" parameterType="home.Account">
+    	update test_account 
+    	set pw = #{pw}, name = #{name}, tel = #{tel} 
+    	where id = #{id}
     </update>
 
-    <delete id="deleteNotice" parameterType="int">
-        DELETE FROM test_notice WHERE num = #{num}
+    <delete id="deleteAccount" parameterType="String">
+        DELETE FROM test_account WHERE num = #{num}
     </delete>
     
-    <update id="updateHits" parameterType="home.Notice">
+    
+    
+    
+    
+    <update id="updateHits" parameterType="home.Account">
     	update test_notice set hits = #{hits} where num = #{num}
     </update>
     

@@ -16,5 +16,8 @@ public class Account {
 	private String name;
 	private String tel;
 	
-	public Account() {}
+	public Account(String id, String pw) {
+		this.id = id;
+		this.pw = pw;
+	}
 }
