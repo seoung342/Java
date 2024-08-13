@@ -1,9 +1,9 @@
 <%@page import="home.ContentDAO"%>
-<%@page import="home.ContentDTO"%>
+<%@page import="home.Content"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 
 	String id = (String)session.getAttribute("id");
 	String pw = (String)session.getAttribute("pw");
@@ -12,7 +12,7 @@
 	
 	int num = Integer.parseInt(request.getParameter("num"));
 	ContentDAO dao = new ContentDAO();
-	ContentDTO dto = dao.getOne(num);
+	Content dto = dao.getOne(num);
 %>
 <!DOCTYPE html>
 <html>

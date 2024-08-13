@@ -1,9 +1,11 @@
-<%@page import="home.NoticeDTO"%>
+<%@page import="home.Notice"%>
 <%@page import="java.util.List"%>
 <%@page import="home.NoticeDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+p
+
 	request.setCharacterEncoding("UTF-8");
 	
 	String id = (String)session.getAttribute("id");
@@ -12,8 +14,7 @@
 	String tel = (String)session.getAttribute("tel");
 	
 	NoticeDAO dao = new NoticeDAO();
-	List<NoticeDTO> list = dao.getNoticeList();
-
+	List<Notice> list = dao.getNoticeList();
 %>
 
 <!DOCTYPE html>
@@ -92,28 +93,38 @@ input[type="button"]:hover {
                 <li><a href="content.jsp">게시판</a></li>
                 <li><a href="location.jsp">LOCATION</a></li>
             <%
-            if ( id != null && id.equals("root")){
+            p
+
+                        if ( id != null && id.equals("root")){
             %>
             	<li><a href="register_modify.jsp">회원 관리</a></li>
             <%
-            }
+            p
+
+                        }
             %>
             </ul>
 
             <ul class="util">
             <%
-            if ( id != null){
+            p
+
+                        if ( id != null){
             %>
-            	<li><a><%=name %></a></li>
+            	<li><a><%=t(nam%></a></li>
             	<li><a href="myinfo.jsp">내 정보</a>
             	<li><a href="logout.jsp">로그아웃</a></li>
             <%
-            }else{
+            p
+
+                        }else{
             %>
                 <li><a href="login.jsp">로그인</a></li>
                 <li><a href="register.jsp">회원가입</a></li>
             <%
-            }
+            p
+
+                        }
             %>
             </ul>
         </div>
@@ -128,7 +139,9 @@ input[type="button"]:hover {
 		        <th                >조회수  </th>
 		    </tr>
 <%
-for(NoticeDTO dto : list) {
+p
+
+for(Notice dto : list) {
 %>
 		    <tr>
 		        <td><%=dto.getNum() %></td>
