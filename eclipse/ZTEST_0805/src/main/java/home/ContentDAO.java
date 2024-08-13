@@ -17,7 +17,7 @@ public class ContentDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	
-	private String CONTENT_LIST = "select * from test_content order by num";
+	private String CONTENT_LIST = "select * from test_content order by num desc";
 	private String CONTENT_ONE = "select * from test_content where num = ?";
 	private String CONTENT_INSERT = "insert into test_content (writer, title, content, regtime, hits) values (?, ?, ?, ?, 0)";
 	private String CONTENT_UPDATE = "update test_content set writer = ?, title = ?, content = ?, regtime = ? where num = ?";

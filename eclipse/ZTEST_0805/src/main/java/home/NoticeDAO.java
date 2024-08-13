@@ -17,7 +17,7 @@ public class NoticeDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	
-	private String NOTICE_LIST = "select * from test_notice order by num";
+	private String NOTICE_LIST = "select * from test_notice order by num desc";
 	private String NOTICE_ONE = "select * from test_notice where num = ?";
 	private String NOTICE_INSERT = "insert into test_notice (writer, title, content, regtime, hits) values (?, ?, ?, ?, 0)";
 	private String NOTICE_UPDATE = "update test_notice set writer = ?, title = ?, content = ?, regtime = ? where num = ?";

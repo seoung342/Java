@@ -6,41 +6,57 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	int num = Integer.parseInt(request.getParameter("update"));
+	Double total = (Double)session.getAttribute("total");
 	ProductDAO productDAO = new ProductDAO();
 	Product product = productDAO.getProductById(num);
-	if(session.getAttribute("total") == null){
-		session.setAttribute("total", 0.0);
-	}
-        int first = product.getStock();
-        String id = String.valueOf(product.getId());
-        if (product.getStock() > 0) {
-            product.setStock(first - 1);
-            productDAO.updateProduct(product);
 
-            HashMap<String, Product> cart = (HashMap<String, Product>) session.getAttribute("cart");
-            if (cart == null) {
-                cart = new HashMap<>();
-            }
-            if (cart.containsKey(product.getName())) {
-            	int count = (Integer)session.getAttribute(id) + 1;
-            	double price = (Double)session.getAttribute(id+'*');
-				if(session.getAttribute("total") != null){
-					double a = (Double)session.getAttribute("total") + price;
-					session.setAttribute("total", a);
-				}
-                cart.put(product.getName(),new Product(0,product.getName(),product.getDescription(),product.getPrice(),count));
-                session.setAttribute(id,count);
-            } else {
-            	cart.put(product.getName(),new Product(0,product.getName(),product.getDescription(),product.getPrice(),1));
-            	session.setAttribute(id,1);
-            	session.setAttribute(id+'*',product.getPrice());
-            	if(session.getAttribute("total") != null){
-					double a = (Double)session.getAttribute("total") + product.getPrice();
-					session.setAttribute("total", a);
-				}
-            }
-            session.setAttribute("cart", cart);
+	// 세션에서 장바구니 가져오기
+	HashMap<String, Product> cart = null;
+	Object cartObject = session.getAttribute("cart");
+	if (cartObject instanceof HashMap<?, ?>) {
+	    // 타입 검사를 통과한 경우에만 캐스팅
+	    @SuppressWarnings("unchecked")
+	    HashMap<String, Product> tempCart = (HashMap<String, Product>) cartObject;
+	    // 추가적인 검사: 키와 값의 타입이 정확한지 확인
+	    if (tempCart.size() > 0 && 
+	        tempCart.keySet().iterator().next() instanceof String &&
+	        tempCart.values().iterator().next() instanceof Product) {
+	        cart = tempCart;
+	    }
+	}
+	
+	if (cart == null) {
+        cart = new HashMap<>();
+    }
+	
+	if(total == null){
+		total = 0.0;
+		session.setAttribute("total", total);
+	}
+	
+	// 물건이 1개 이상 있으면
+    if (product.getStock() > 0) {
+    	// 갯수 1개 빼서 DB 저장
+    	int newStock = product.getStock() -1;
+   		product.setStock(newStock);
+    	productDAO.updateProduct(product);
+        
+        // 가격, 물건 이름
+        double price = product.getPrice();
+        String productName = product.getName();
+        
+        if (cart.containsKey(productName)) {
+            Product cartProduct = cart.get(productName);
+            int count = cartProduct.getStock() + 1;
+            cartProduct.setStock(count);
+            cart.put(productName, cartProduct);
+            total += price;
+        } else {
+          	cart.put(product.getName(),new Product(0,productName,product.getDescription(),price,1));
+           	total += price;
         }
-    
+        session.setAttribute("cart", cart);
+        session.setAttribute("total", total);
+    }
 %>
 <jsp:forward page="products.jsp"/>
