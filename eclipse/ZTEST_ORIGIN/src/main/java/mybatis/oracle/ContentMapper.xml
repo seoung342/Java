@@ -13,13 +13,13 @@
     </select>
 
     <insert id="insertContent" parameterType="home.Content">
-        INSERT INTO test_content (writer, title, content, regtime, hits)
-        VALUES (#{writer}, #{title}, #{content}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 0)
+        INSERT INTO test_content (writer, title, content, regtime, hits, user_id)
+        VALUES (#{writer}, #{title}, #{content}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), 0, #{user_id})
     </insert>
 
     <update id="updateContent" parameterType="home.Content">
         UPDATE test_content
-        SET writer = #{writer}, title = #{title}, content = #{content}, regtime = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') 
+        SET title = #{title}, content = #{content}, regtime = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') 
         WHERE num = #{num}
     </update>
 

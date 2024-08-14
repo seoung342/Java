@@ -16,6 +16,7 @@ public class Content {
 	private String content;
 	private String regtime;
 	private int hits;
+	private String user_id;
 	
 	public Content(){}
 }

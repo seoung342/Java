@@ -107,6 +107,7 @@
         <div class="inner">
 	<form method="post" action="content_insert.jsp">
 		<input type="hidden" name = "writer" value="${name }">
+		<input type="hidden" name = "user_id" value="${id }">
 	    <table>
 	        <tr>
 	            <th>제목</th>
