@@ -19,7 +19,7 @@
 
     <update id="updateNotice" parameterType="home.Notice">
         UPDATE test_notice
-        SET writer = #{writer}, title = #{title}, content = #{content}, regtime = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') 
+        SET title = #{title}, content = #{content}, regtime = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') 
         WHERE num = #{num}
     </update>
 

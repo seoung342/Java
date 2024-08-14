@@ -115,10 +115,11 @@
     </header>
      <section>
         <div class="inner">
-	<form method="post" action="notice_update.jsp">
+	<form method="post" action="notice">
 		<input type="hidden" name="num" value="${dto.num }">
 		<input type="hidden" name="hits" value="${dto.hits }">
 		<input type="hidden" name="writer" value="${dto.writer }">
+		<input type="hidden" name="action" value="update">
 	    <table>
 	        <tr>
 	            <th>제목</th>

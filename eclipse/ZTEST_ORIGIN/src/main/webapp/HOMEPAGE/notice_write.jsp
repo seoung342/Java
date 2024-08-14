@@ -105,7 +105,8 @@
     </header>
   <section>
         <div class="inner">
-            <form method="post" action="notice_insert.jsp">
+            <form method="post" action="notice" accept-charset="UTF-8">
+            <input type="hidden" name="action" value="insert">
                 <input type="hidden" name="writer" value="${name }">
                 <table>
                     <tr>
