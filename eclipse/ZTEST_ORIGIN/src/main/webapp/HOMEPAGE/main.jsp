@@ -19,7 +19,7 @@
 				<a href="main.jsp">Stock Quotes</a>
 			</h1>
 			<ul id="gnb">
-				<li><a href="notice.jsp">공지사항</a></li>
+				<li><a href="notice">공지사항</a></li>
 				<li><a href="content.jsp">게시판</a></li>
 				<li><a href="location.jsp">LOCATION</a></li>
 				<c:if test="${id != null && id eq 'root'}">

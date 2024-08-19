@@ -140,15 +140,13 @@ request.setCharacterEncoding("UTF-8");
 			    </tr>
 			</table>
 			<br>
-			<input type="button" value="이전 페이지" onclick="location.href='notice.jsp'">
+			<input type="button" value="이전 페이지" onclick="location.href='notice'">
 			<c:if test="${id != null && name eq dto.writer }">
 	<form action="notice" method="post">
     <input type="hidden" name="action" value="fix">
     <input type="hidden" name="num" value="${dto.num}">
     <input type="submit" value="수정">
     </form>
-				<input type="button" value="수정"
-	       			onclick="location.href='notice_fix.jsp?num=${dto.num}'">
 	<form action="notice" method="post">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="num" value="${dto.num}">

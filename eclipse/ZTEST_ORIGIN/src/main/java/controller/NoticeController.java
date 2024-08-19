@@ -21,9 +21,10 @@ public class NoticeController extends HttpServlet {
     public NoticeController() {
         super();
         noticeService = new NoticeService();
-    }//response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String view = null;
 		
 		// URL에서 프로젝트 이름 뒷 부분의 문자열 얻어내기
@@ -37,7 +38,7 @@ public class NoticeController extends HttpServlet {
      // 주어진 URL에 따라 지정된 동작 수행
         if (com.equals("/HOMEPAGE/notice")) {
         	 List<Notice> notices = noticeService.getAllNotices();
-             request.setAttribute("notices", notices);
+             request.setAttribute("noticeList", notices);
             view = "notice.jsp";
         }else {
         	 view = "error.jsp";
@@ -58,22 +59,24 @@ public class NoticeController extends HttpServlet {
             String content = request.getParameter("content");
             Notice newNotice = new Notice(0, writer, title, content, "0", 0);
             noticeService.insertNotice(newNotice);
-            response.sendRedirect("notice");
+            response.sendRedirect(request.getContextPath() + "/HOMEPAGE/notice");
 		}else if (action.equals("update")) {
 			int num = Integer.parseInt(request.getParameter("num"));
             String newTitle = request.getParameter("title");
             String newContent = request.getParameter("content");
             Notice updatedNotice = new Notice(num, null, newTitle, newContent, null, 0);
             noticeService.updateNotice(updatedNotice);
-            response.sendRedirect("notice_view.jsp?num=" + num);
+            response.sendRedirect(request.getContextPath() + "/HOMEPAGE/notice_view.jsp?num=" + num);
 		}else if(action.equals("delete")) {
 			 int delNum = Integer.parseInt(request.getParameter("num"));
              noticeService.deleteNotice(delNum);
-             response.sendRedirect("notice");
+             response.sendRedirect(request.getContextPath() + "/HOMEPAGE/notice");
 		}else if(action.equals("fix")) {
 			int num = Integer.parseInt(request.getParameter("num"));
-			
-			response.sendRedirect("notice_view.jsp?num=" + num);
+			Notice notice = noticeService.getNoticeByNum(num);
+			System.out.println(notice);
+			request.setAttribute("notice", notice);
+			response.sendRedirect("notice_fix.jsp?num=" + num);
 		}else {
 			doGet(request, response);
 		}
