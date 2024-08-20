@@ -20,7 +20,7 @@
 			</h1>
 			<ul id="gnb">
 				<li><a href="notice">공지사항</a></li>
-				<li><a href="content.jsp">게시판</a></li>
+				<li><a href="content">게시판</a></li>
 				<li><a href="location.jsp">LOCATION</a></li>
 				<c:if test="${id != null && id eq 'root'}">
 					<li><a href="register_modify.jsp">회원 관리</a></li>

@@ -4,11 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-ContentDAO dao = new ContentDAO();
-List<Content> list = dao.getAllContent();
-request.setAttribute("contentList", list);
-%>
 
 <!DOCTYPE html>
 <html>
@@ -20,57 +15,10 @@ request.setAttribute("contentList", list);
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <%-- <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script> --%>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/a.css">
+<link rel="stylesheet" href="css/input.css">
 <script src="js/ie.js"></script>
-<style>
-table {
-	width: 100%;
-	border-collapse: collapse; /* 테두리 합침 */
-	margin: 20px 0; /* 위와 아래 여백 */
-	background-color: #fff; /* 배경색 흰색 */
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
-}
-
-th, td {
-	padding: 10px; /* 셀 안쪽 여백 */
-	text-align: center; /* 중앙 정렬 */
-	border-bottom: 1px solid #ddd; /* 하단 테두리 */
-}
-
-th {
-	background-color: #f4f4f4; /* 헤더 배경색 */
-	color: #333; /* 헤더 글자색 */
-	font-weight: bold; /* 헤더 글자 두께 */
-}
-
-tr:hover {
-	background-color: #f9f9f9; /* 마우스 오버 시 배경색 */
-}
-
-a {
-	color: #007bff; /* 링크 색상 */
-	text-decoration: none; /* 링크 밑줄 제거 */
-	transition: color 0.3s; /* 색상 변화 애니메이션 */
-}
-
-a:hover {
-	color: #0056b3; /* 링크 마우스 오버 색상 */
-}
-
-input[type="button"] {
-	background-color: #007bff; /* 버튼 배경색 */
-	color: #fff; /* 버튼 글자색 */
-	border: none; /* 버튼 테두리 제거 */
-	padding: 10px 20px; /* 버튼 패딩 */
-	border-radius: 5px; /* 버튼 둥근 모서리 */
-	cursor: pointer; /* 커서 포인터 */
-	font-size: 16px; /* 버튼 글자 크기 */
-	transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
-}
-
-input[type="button"]:hover {
-	background-color: #0056b3; /* 버튼 마우스 오버 배경색 */
-}
-</style>
 </head>
 <body>
 	<header>
@@ -80,8 +28,8 @@ input[type="button"]:hover {
 			</h1>
 
 			<ul id="gnb">
-				<li><a href="notice.jsp">공지사항</a></li>
-				<li><a href="content.jsp">게시판</a></li>
+				<li><a href="notice">공지사항</a></li>
+				<li><a href="content">게시판</a></li>
 				<li><a href="location.jsp">LOCATION</a></li>
 				<c:if test="${id != null && id eq 'root'}">
 					<li><a href="register_modify.jsp">회원 관리</a></li>
@@ -110,11 +58,11 @@ input[type="button"]:hover {
 			<th class="regtime">작성일시</th>
 			<th>조회수</th>
 		</tr>
-		<c:forEach var="dto" items="${contentList}">
+		<c:forEach var="dto" items="${content}">
 			<tr>
 				<td>${dto.num}</td>
 				<td style="text-align: left;"><a
-					href="content_view.jsp?num=${dto.num}">${dto.title}</a></td>
+					href="content_view?num=${dto.num}">${dto.title}</a></td>
 				<td>${dto.writer}</td>
 				<td>${dto.regtime}</td>
 				<td>${dto.hits}</td>

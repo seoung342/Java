@@ -3,16 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-request.setCharacterEncoding("UTF-8");
-
-int num = Integer.parseInt(request.getParameter("num"));
-ContentDAO dao = new ContentDAO();
-Content dto = dao.getContentByNum(num);
-dao.updateHits(dto.getNum(), dto.getHits()+1);
-
-request.setAttribute("dto", dto);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,70 +13,10 @@ request.setAttribute("dto", dto);
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <%-- <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script> --%>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/a.css">
+<link rel="stylesheet" href="css/input.css">
 <script src="js/ie.js"></script>
-<style>
-table {
-	width: 100%;
-	border-collapse: collapse; /* 테두리 합침 */
-	margin: 20px 0; /* 위와 아래 여백 */
-	background-color: #fff; /* 배경색 흰색 */
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 */
-}
-
-th, td {
-	padding: 10px; /* 셀 안쪽 여백 */
-	text-align: left; /* 좌측 정렬 */
-	border-bottom: 1px solid #ddd; /* 하단 테두리 */
-}
-
-th {
-	background-color: #f4f4f4; /* 헤더 배경색 */
-	color: #333; /* 헤더 글자색 */
-	font-weight: bold; /* 헤더 글자 두께 */
-}
-
-tr:hover {
-	background-color: #f9f9f9; /* 마우스 오버 시 배경색 */
-}
-
-a {
-	color: #007bff; /* 링크 색상 */
-	text-decoration: none; /* 링크 밑줄 제거 */
-	transition: color 0.3s; /* 색상 변화 애니메이션 */
-}
-
-a:hover {
-	color: #0056b3; /* 링크 마우스 오버 색상 */
-}
-
-input[type="button"], input[type="submit"] {
-	background-color: #007bff; /* 버튼 배경색 */
-	color: #fff; /* 버튼 글자색 */
-	border: none; /* 버튼 테두리 제거 */
-	padding: 10px 20px; /* 버튼 패딩 */
-	border-radius: 5px; /* 버튼 둥근 모서리 */
-	cursor: pointer; /* 커서 포인터 */
-	font-size: 16px; /* 버튼 글자 크기 */
-	transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
-}
-
-input[type="button"]:hover, input[type="submit"]:hover {
-	background-color: #0056b3; /* 버튼 마우스 오버 배경색 */
-}
-
-input[type="text"], textarea {
-	width: 100%; /* 입력 필드 너비 100% */
-	box-sizing: border-box; /* 테두리와 패딩을 포함한 너비 설정 */
-}
-
-textarea {
-	resize: vertical; /* 세로 방향으로만 크기 조절 가능 */
-}
-
-.author-label {
-	text-align: left; /* 작성자 왼쪽 정렬 */
-}
-</style>
 </head>
 <body>
 	<header>
@@ -96,8 +26,8 @@ textarea {
 			</h1>
 
 			<ul id="gnb">
-				<li><a href="notice.jsp">공지사항</a></li>
-				<li><a href="content.jsp">게시판</a></li>
+				<li><a href="notice">공지사항</a></li>
+				<li><a href="content">게시판</a></li>
 				<li><a href="location.jsp">LOCATION</a></li>
 				<c:if test="${id != null && id eq 'root'}">
 					<li><a href="register_modify.jsp">회원 관리</a></li>
@@ -123,37 +53,46 @@ textarea {
 			<table>
 				<tr>
 					<th>제목</th>
-					<td>${dto.title}</td>
+					<td>${content.title}</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${dto.writer}</td>
+					<td>${content.writer}</td>
 				</tr>
 				<tr>
 					<th>작성일시</th>
-					<td>${dto.regtime}</td>
+					<td>${content.regtime}</td>
 				</tr>
 				<tr>
 					<th>조회수</th>
-					<td>${dto.hits}</td>
+					<td>${content.hits}</td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>${dto.content}</td>
+					<td>${content.content}</td>
 				</tr>
 			</table>
 			<br> <input type="button" value="이전 페이지"
-				onclick="location.href='content.jsp'">
+				onclick="location.href='content'">
 			<c:choose>
-				<c:when test="${id != null && name eq dto.writer}">
-					<input type="button" value="수정"
-						onclick="location.href='content_fix.jsp?num=${dto.num}'">
-					<input type="button" value="삭제"
-						onclick="location.href='content_delete.jsp?num=${dto.num}'">
+				<c:when test="${id != null && name eq content.writer}">
+					<form action="content" method="post">
+						<input type="hidden" name="action" value="fix"> <input
+							type="hidden" name="num" value="${content.num}"> <input
+							type="submit" value="수정">
+					</form>
+					<form action="content" method="post">
+						<input type="hidden" name="action" value="delete"> <input
+							type="hidden" name="num" value="${content.num}"> <input
+							type="submit" value="삭제">
+							</form>
 				</c:when>
 				<c:when test="${id != null && id eq 'root'}">
-					<input type="button" value="삭제"
-						onclick="location.href='content_delete.jsp?num=${dto.num}'">
+					<form action="content" method="post">
+						<input type="hidden" name="action" value="delete"> <input
+							type="hidden" name="num" value="${content.num}"> <input
+							type="submit" value="삭제">
+							</form>
 				</c:when>
 			</c:choose>
 		</div>
