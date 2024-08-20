@@ -31,14 +31,4 @@
         DELETE FROM test_account WHERE num = #{num}
     </delete>
     
-    
-    
-    
-    
-    <update id="updateHits" parameterType="home.Account">
-    	update test_notice set hits = #{hits} where num = #{num}
-    </update>
-    
-    
-    
 </mapper>

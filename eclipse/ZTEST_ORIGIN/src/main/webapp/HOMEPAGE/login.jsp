@@ -10,7 +10,8 @@
 <body>
 	<div class="login-container">
 		<h2>Login</h2>
-		<form action="loginProcess.jsp" method="get">
+		<form method="post" action="login" >
+			<input type="hidden" name="action" value="login">
 			<input type="text" name="id" placeholder="ID" required> <input
 				type="password" name="pw" placeholder="Password" required>
 			<button type="submit">Login</button>

@@ -22,7 +22,7 @@
     <!-- 서블릿 매핑 -->
     <servlet-mapping>
         <servlet-name>AccountController</servlet-name>
-        <url-pattern>/HOMEPAGE/account</url-pattern>
+        <url-pattern>/HOMEPAGE/login</url-pattern>
     </servlet-mapping><servlet-mapping>
         <servlet-name>ContentController</servlet-name>
         <url-pattern>/HOMEPAGE/content</url-pattern>
