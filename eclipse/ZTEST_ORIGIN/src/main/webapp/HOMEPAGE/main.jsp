@@ -9,40 +9,41 @@
 	<title>홈페이지</title>
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	<%-- <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script> --%>
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/style.css">
 	<script src="js/ie.js"></script>
 </head>
 <body>
 	<header>
 		<div class="inner">
 			<h1>
-				<a href="main.jsp">Stock Quotes</a>
+				<a href="main">Stock Quotes</a>
 			</h1>
+
 			<ul id="gnb">
 				<li><a href="notice">공지사항</a></li>
 				<li><a href="content">게시판</a></li>
-				<li><a href="location.jsp">LOCATION</a></li>
+				<li><a href="location">LOCATION</a></li>
 				<c:if test="${id != null && id eq 'root'}">
-					<li><a href="register_modify.jsp">회원 관리</a></li>
+					<li><a href="register_modify">회원 관리</a></li>
 				</c:if>
 			</ul>
 			<ul class="util">
 				<c:choose>
 					<c:when test="${id != null}">
 						<li><a>${name}</a></li>
-						<li><a href="myinfo.jsp">내 정보</a></li>
-						<li><a href="logout.jsp">로그아웃</a></li>
+						<li><a href="myinfo">내 정보</a></li>
+						<li><a href="logout">로그아웃</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="login.jsp">로그인</a></li>
-						<li><a href="register.jsp">회원가입</a></li>
+						<li><a href="login">로그인</a></li>
+						<li><a href="register">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
 		</div>
 	</header>
 	<figure>
-		<video src="img/visual.mp4" autoplay muted loop></video>
+		<video src="/ZTEST_ORIGIN/HOMEPAGE/img/visual.mp4" autoplay muted loop></video>
 		<div class="inner">
 			<h1>A Stock Quotes</h1>
 			<p>
@@ -58,7 +59,7 @@
 			<div class="wrap">
 				<article>
 					<div class="pic">
-						<img src="img/sellbuy.jpg" alt="1ë²ì§¸ ì½íì¸  ì´ë¯¸ì§">
+						<img src="/ZTEST_ORIGIN/HOMEPAGE/img/sellbuy.jpg" alt="1ë²ì§¸ ì½íì¸  ì´ë¯¸ì§">
 					</div>
 					<h2>
 						<a href="#"> stay in the market, not to get out</a>
@@ -69,7 +70,7 @@
 
 				<article>
 					<div class="pic">
-						<img src="img/news2.jpg" alt="2ë²ì§¸ ì½íì¸  ì´ë¯¸ì§">
+						<img src="/ZTEST_ORIGIN/HOMEPAGE/img/news2.jpg" alt="2ë²ì§¸ ì½íì¸  ì´ë¯¸ì§">
 					</div>
 					<h2>
 						<a href="#">Mike Murdock</a>
@@ -79,7 +80,7 @@
 
 				<article>
 					<div class="pic">
-						<img src="img/Chales.jpg" alt="3ë²ì§¸ ì½íì¸  ì´ë¯¸ì§">
+						<img src="/ZTEST_ORIGIN/HOMEPAGE/img/Chales.jpg" alt="3ë²ì§¸ ì½íì¸  ì´ë¯¸ì§">
 					</div>
 					<h2>
 						<a href="#">Chales Fulton Oursler</a>
@@ -90,7 +91,7 @@
 
 				<article>
 					<div class="pic">
-						<img src="img/AlbertEinstein.jpg"
+						<img src="/ZTEST_ORIGIN/HOMEPAGE/img/AlbertEinstein.jpg"
 							alt="4ë²ì§¸ ì½íì¸  ì´ë¯¸ì§">
 					</div>
 					<h2>

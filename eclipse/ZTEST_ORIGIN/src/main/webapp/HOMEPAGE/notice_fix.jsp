@@ -11,47 +11,49 @@
     <title>공지사항</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <%-- <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script> --%>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/style.css">
     <script src="js/ie.js"></script>
-    <link rel="stylesheet" href="css/table.css">
-<link rel="stylesheet" href="css/a.css">
-<link rel="stylesheet" href="css/input.css">
+    <link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/table.css">
+<link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/a.css">
+<link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/input.css">
 </head>
 <body>
 <header>
-        <div class="inner">
-            <h1><a href="main.jsp">Stock Quotes</a></h1>
+		<div class="inner">
+			<h1>
+				<a href="main">Stock Quotes</a>
+			</h1>
 
-            <ul id="gnb">
-                <li><a href="notice">공지사항</a></li>
-                <li><a href="content">게시판</a></li>
-                <li><a href="location.jsp">LOCATION</a></li>
-            	<c:if test="${id != null && id eq 'root'}">
-   					<li><a href="register_modify.jsp">회원 관리</a></li>
+			<ul id="gnb">
+				<li><a href="notice">공지사항</a></li>
+				<li><a href="content">게시판</a></li>
+				<li><a href="location">LOCATION</a></li>
+				<c:if test="${id != null && id eq 'root'}">
+					<li><a href="register_modify">회원 관리</a></li>
 				</c:if>
-         	</ul>
-            <ul class="util">
-			    <c:choose>
-			        <c:when test="${id != null}">
-			            <li><a>${name}</a></li>
-			            <li><a href="myinfo.jsp">내 정보</a></li>
-			            <li><a href="logout.jsp">로그아웃</a></li>
-			        </c:when>
-			        <c:otherwise>
-			            <li><a href="login.jsp">로그인</a></li>
-			            <li><a href="register.jsp">회원가입</a></li>
-			        </c:otherwise>
-			    </c:choose>
 			</ul>
-        </div>
-    </header>
+			<ul class="util">
+				<c:choose>
+					<c:when test="${id != null}">
+						<li><a>${name}</a></li>
+						<li><a href="myinfo">내 정보</a></li>
+						<li><a href="logout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="login">로그인</a></li>
+						<li><a href="register">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+	</header>
      <section>
         <div class="inner">
 	<form method="post" action="notice">
 		<input type="hidden" name="num" value="${notice.num }">
 		<input type="hidden" name="hits" value="${notice.hits }">
 		<input type="hidden" name="writer" value="${notice.writer }">
-		<input type="hidden" name="action" value="update">
+		<input type="hidden" name="action" value="notice_update">
 	    <table>
 	        <tr>
 	            <th>제목</th>

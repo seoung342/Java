@@ -10,34 +10,34 @@
 <title>홈페이지</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <%-- <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script> --%>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/style.css">
 <script src="js/ie.js"></script>
 </head>
 <body>
 	<header>
 		<div class="inner">
 			<h1>
-				<a href="main.jsp">Stock Quotes</a>
+				<a href="main">Stock Quotes</a>
 			</h1>
 
 			<ul id="gnb">
 				<li><a href="notice">공지사항</a></li>
 				<li><a href="content">게시판</a></li>
-				<li><a href="location.jsp">LOCATION</a></li>
+				<li><a href="location">LOCATION</a></li>
 				<c:if test="${id != null && id eq 'root'}">
-					<li><a href="register_modify.jsp">회원 관리</a></li>
+					<li><a href="register_modify">회원 관리</a></li>
 				</c:if>
 			</ul>
 			<ul class="util">
 				<c:choose>
 					<c:when test="${id != null}">
 						<li><a>${name}</a></li>
-						<li><a href="myinfo.jsp">내 정보</a></li>
-						<li><a href="logout.jsp">로그아웃</a></li>
+						<li><a href="myinfo">내 정보</a></li>
+						<li><a href="logout">로그아웃</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="login.jsp">로그인</a></li>
-						<li><a href="register.jsp">회원가입</a></li>
+						<li><a href="login">로그인</a></li>
+						<li><a href="register">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -45,7 +45,7 @@
 	</header>
 	<section>
 		<div class="inner">
-			<img src="img/location.png">
+			<img src="${pageContext.request.contextPath}/HOMEPAGE/img/location.png">
 			<p>위치 : 서울 영등포구 여의나루로 76 한국거래소</p>
 			<p>전화 번호 : 1577-0088 / 02-3774-9000</p>
 		</div>
