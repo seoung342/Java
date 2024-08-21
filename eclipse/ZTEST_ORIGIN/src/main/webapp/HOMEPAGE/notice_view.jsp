@@ -15,9 +15,6 @@
 <%-- <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script> --%>
 <link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/style.css">
 <script src="js/ie.js"></script>
-<link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/table.css">
-<link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/a.css">
-<link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/input.css">
 </head>
 <body>
 	<header>
@@ -29,6 +26,7 @@
 			<ul id="gnb">
 				<li><a href="notice">공지사항</a></li>
 				<li><a href="content">게시판</a></li>
+				<li><a href="fileStorage">자료실</a></li>
 				<li><a href="location">LOCATION</a></li>
 				<c:if test="${id != null && id eq 'root'}">
 					<li><a href="register_modify">회원 관리</a></li>

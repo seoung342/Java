@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>자료실</title>
+<head>
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>홈페이지</title>
+<title>자료실</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <%-- <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script> --%>
 <link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/style.css">
@@ -44,13 +47,29 @@
 			</ul>
 		</div>
 	</header>
-	<section>
-		<div class="inner">
-			<img src="${pageContext.request.contextPath}/HOMEPAGE/img/location.png">
-			<p>위치 : 서울 영등포구 여의나루로 76 한국거래소</p>
-			<p>전화 번호 : 1577-0088 / 02-3774-9000</p>
-		</div>
-	</section>
+	<table>
+		<tr>
+			<th class="num">번호</th>
+			<th class="title">제목</th>
+			<th class="writer">작성자</th>
+			<th class="regtime">작성일시</th>
+			<th>조회수</th>
+		</tr>
+		<c:forEach var="file" items="${fileList}">
+			<tr>
+				<td>${file.num}</td>
+				<td style="text-align: left;"><a
+					href="fileStorage_view?num=${file.num}">${file.title}</a></td>
+				<td>${file.writer}</td>
+				<td>${file.ftime}</td>
+				<td>${file.hits}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<c:if test="${id != null }">
+		<input type="button" value="글쓰기"
+			onclick="location.href='fileStorage_write'">
+	</c:if>
 	<footer>
 		<div class="inner">
 			<div class="upper">
@@ -62,7 +81,6 @@
 					<li><a href="#">Sitemap</a></li>
 				</ul>
 			</div>
-
 			<div class="lower">
 				<address>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas,
@@ -72,5 +90,7 @@
 			</div>
 		</div>
 	</footer>
+
+
 </body>
 </html>

@@ -20,5 +20,6 @@
 		<mapper resource="mybatis/oracle/NoticeMapper.xml"/>
 		<mapper resource="mybatis/oracle/ContentMapper.xml"/>
 		<mapper resource="mybatis/oracle/AccountMapper.xml"/>
+		<mapper resource="mybatis/oracle/FileStorageMapper.xml"/>
 	</mappers>
 </configuration>

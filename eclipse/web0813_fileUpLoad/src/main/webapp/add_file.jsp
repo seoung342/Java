@@ -18,7 +18,7 @@
     );
 
     File file = multi.getFile("upload");         // 파일 객체 얻기
-	
+
     if (file != null){
     	 WebhardDAO dao = new WebhardDAO();
     	 Webhard webhard = new Webhard(0,file.getName(),"0",(int)file.length());

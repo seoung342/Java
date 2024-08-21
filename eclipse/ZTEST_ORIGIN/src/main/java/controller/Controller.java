@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -13,10 +14,15 @@ import javax.servlet.http.HttpSession;
 
 import home.Account;
 import home.Content;
+import home.FileStorage;
 import home.Notice;
 import service.AccountService;
 import service.ContentService;
+import service.FileStorageService;
 import service.NoticeService;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @WebServlet("/")
 public class Controller extends HttpServlet {
@@ -24,12 +30,14 @@ public class Controller extends HttpServlet {
 	private ContentService contentService;
 	private NoticeService noticeService;
 	private AccountService accountService;
+	private FileStorageService fileStorageService;
 	
     public Controller() {
         super();
         contentService = new ContentService();
         noticeService = new NoticeService();
         accountService = new AccountService();
+        fileStorageService = new FileStorageService();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -90,9 +98,19 @@ public class Controller extends HttpServlet {
         	view = "/HOMEPAGE/register.jsp";
         }else if(com.equals("/myinfo")) {
         	view = "/HOMEPAGE/myinfo.jsp";
-        }
-		
-		else {
+        }else if(com.equals("/fileStorage")) {
+        	List<FileStorage> list = fileStorageService.getAllFileStorage();
+        	request.setAttribute("fileList", list);
+        	view = "/HOMEPAGE/fileStorage.jsp";
+        }else if(com.equals("/fileStorage_view")) {
+        	String num = request.getParameter("num");
+        	FileStorage fileStorage = fileStorageService.getFileStorageByNum(num);
+        	fileStorageService.updateHits(num, fileStorage.getHits()+1);
+        	request.setAttribute("fileStorage", fileStorage);
+        	view = "/HOMEPAGE/fileStorage_view.jsp";
+        }else if(com.equals("/fileStorage_write")) {
+        	view = "/HOMEPAGE/fileStorage_write.jsp";
+        }else {
         	view = "error.jsp";
         }
         
@@ -104,12 +122,23 @@ public class Controller extends HttpServlet {
         }
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
+		
+		MultipartRequest multi = null;
+		if(action == null) {
+			 multi = new MultipartRequest(
+	                request,
+	                getServletContext().getRealPath("/HOMEPAGE/fileStorage"),
+	                100 * 1024 * 1024,
+	                "UTF-8",
+	                new DefaultFileRenamePolicy()
+	        );
+			 action = multi.getParameter("action");
+		}
+		
+		
 		if(action.equals("content_insert")) {
 			String writer = request.getParameter("writer");
             String title = request.getParameter("title");
@@ -171,8 +200,8 @@ public class Controller extends HttpServlet {
 				session.setAttribute("id", id);
 			    session.setAttribute("pw", pw);
 			    session.setAttribute("name", account.getName());
-			    session.setAttribute("tel", account.getTel());
-			    response.sendRedirect(request.getContextPath() + "/");
+			    session.setAttribute("tel", account.getTel()); 
+			    response.sendRedirect(request.getContextPath() + "/main");
 		    }else {
 		    	response.sendRedirect(request.getContextPath() + "/login");
 		    }
@@ -210,7 +239,58 @@ public class Controller extends HttpServlet {
 	        session.setAttribute("name", account.getName());
 	        session.setAttribute("tel", account.getTel());
 	        response.sendRedirect(request.getContextPath() + "/main");	
+	    }else if(action.equals("fileStorage_insert")) {
+	    	String user_id = multi.getParameter("user_id");
+	    	String writer = multi.getParameter("writer");
+	    	String title = multi.getParameter("title");
+	    	String content = multi.getParameter("content");
+	    	
+	        File file = multi.getFile("upload");         // 파일 객체 얻기
+	        
+	        if (file != null){
+	        	FileStorage fileStorage = new FileStorage(0,file.getName(), "0", (int)file.length(),user_id, writer, 0, title, content);
+	        	fileStorageService.insertFileStorage(fileStorage);
+	        	response.sendRedirect(request.getContextPath() + "/fileStorage");
+	        }
+	    }else if(action.equals("fileStorage_update")) {
+	    	String num = multi.getParameter("num"); 
+	    	String title = multi.getParameter("title");
+	    	String content = multi.getParameter("content");
+	    	String delFname = multi.getParameter("delFname");
+	    	
+	    	File file1 = new File(getServletContext().getRealPath("/HOMEPAGE/fileStorage/") +
+    	            delFname);
+	    	if (file1 != null) {
+	    		file1.delete();
+	    		}
+	    	
+	    	File file = multi.getFile("upload");         // 파일 객체 얻기
+	    	FileStorage fileStorage = new FileStorage(Integer.parseInt(num), file.getName(),"0",(int)file.length(),"0","0",0,title,content);
+	    	fileStorageService.updateFileStorage(fileStorage);
+	    	
+	    	
+	    	response.sendRedirect(request.getContextPath() + "/fileStorage_view?num="+num);
+	    	
+	    }else if(action.equals("fileStorage_delete")) {
+	    	String num = request.getParameter("num");
+	    	FileStorage fileStorage = fileStorageService.getFileStorageByNum(num);
+	    	if(fileStorage != null) {
+	    		File file = new File(getServletContext().getRealPath("/HOMEPAGE/fileStorage/") +
+	    	            fileStorage.getFname());
+	    		if (file != null) {
+	    		file.delete();
+	    		}
+	    		fileStorageService.deleteFileStorage(num);
+	    	}
+	    	response.sendRedirect(request.getContextPath() + "/fileStorage");
+	    }else if(action.equals("fileStorage_fix")) {
+	    	String num = request.getParameter("num");
+	        FileStorage fileStorage = fileStorageService.getFileStorageByNum(num);
+	        request.setAttribute("fileStorage", fileStorage);
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("/HOMEPAGE/fileStorage_fix.jsp");
+	        dispatcher.forward(request, response);
 	    }
+		
 	    
 	    
 	    

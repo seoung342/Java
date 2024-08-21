@@ -1,25 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+<title>자료실</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>홈페이지</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
-<%-- <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script> --%>
 <link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/style.css">
 <script src="js/ie.js"></script>
 </head>
 <body>
 	<header>
 		<div class="inner">
-			<h1>
-				<a href="main">Stock Quotes</a>
-			</h1>
-
+			<h1><a href="main">Stock Quotes</a></h1>
 			<ul id="gnb">
 				<li><a href="notice">공지사항</a></li>
 				<li><a href="content">게시판</a></li>
@@ -46,9 +42,40 @@
 	</header>
 	<section>
 		<div class="inner">
-			<img src="${pageContext.request.contextPath}/HOMEPAGE/img/location.png">
-			<p>위치 : 서울 영등포구 여의나루로 76 한국거래소</p>
-			<p>전화 번호 : 1577-0088 / 02-3774-9000</p>
+			<form method="post" action="fileStorage" accept-charset="UTF-8" enctype="multipart/form-data">
+				<input type="hidden" name="num" value="${fileStorage.num }"> 
+				<input type="hidden" name="hits" value="${fileStorage.hits }"> 
+				<input type="hidden" name="writer" value="${fileStorage.writer }">
+				<input type="hidden" name="user_id" value="${fileStorage.user_id }">
+				<input type="hidden" name="delFname" value="${fileStorage.fname }">
+				<input type="hidden" name="action" value="fileStorage_update">
+				<table>
+					<tr>
+						<th>제목</th>
+						<td><input type="text" name="title" maxlength="255"
+							value="${fileStorage.title }"></td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td class="author-label"><label>${fileStorage.writer }</label></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td><textarea name="content" rows="10">${fileStorage.content }</textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>파일</th>
+						<td>
+							<div class="mb-3">
+								<input class="form-control" type="file" id="formFile" name="upload">
+							</div>
+						</td>
+					</tr>
+				</table>
+				<br> <input type="submit" value="저장"> 
+				<input type="button" value="취소" onclick="history.back()">
+			</form>
 		</div>
 	</section>
 	<footer>
@@ -62,7 +89,6 @@
 					<li><a href="#">Sitemap</a></li>
 				</ul>
 			</div>
-
 			<div class="lower">
 				<address>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas,
@@ -72,5 +98,7 @@
 			</div>
 		</div>
 	</footer>
+
+
 </body>
 </html>

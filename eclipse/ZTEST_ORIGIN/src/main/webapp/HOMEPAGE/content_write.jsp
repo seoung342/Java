@@ -11,13 +11,10 @@
     <%-- <script src="https://kit.fontawesome.com/c47106c6a7.js" crossorigin="anonymous"></script> --%>
     <link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/style.css">
     <script src="js/ie.js"></script>
-  <link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/table.css">
-<link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/a.css">
-<link rel="stylesheet" href="/ZTEST_ORIGIN/HOMEPAGE/css/input.css">
 
 </head>
 <body>
- <header>
+	<header>
 		<div class="inner">
 			<h1>
 				<a href="main">Stock Quotes</a>
@@ -26,6 +23,7 @@
 			<ul id="gnb">
 				<li><a href="notice">공지사항</a></li>
 				<li><a href="content">게시판</a></li>
+				<li><a href="fileStorage">자료실</a></li>
 				<li><a href="location">LOCATION</a></li>
 				<c:if test="${id != null && id eq 'root'}">
 					<li><a href="register_modify">회원 관리</a></li>
@@ -46,58 +44,52 @@
 			</ul>
 		</div>
 	</header>
-<section>
-        <div class="inner">
-	<form method="post" action="content" accept-charset="UTF-8">
-		<input type="hidden" name="action" value="content_insert">
-		<input type="hidden" name = "writer" value="${name }">
-		<input type="hidden" name = "user_id" value="${id }">
-	    <table>
-	        <tr>
-	            <th>제목</th>
-	            <td><input type="text" name="title"  maxlength="255"
-	                       value="">
-	            </td>
-	        </tr>
-	        <tr>
-	            <th>작성자</th>
-	            <td class="author-label"><label>${name }</label>
-	            </td>
-	        </tr>
-	        <tr>
-	            <th>내용</th>
-	            <td><textarea name="content" rows="10"></textarea>
-	            </td>
-	        </tr>
-	    </table>
-	
-	    <br>
-	    <input type="submit" value="저장">
-	    <input type="button" value="취소" onclick="history.back()">
-	</form>
- </div>
-    </section>
-    <footer>
-	    <div class="inner">
-	        <div class="upper">
-	            <h1>DCODELAB</h1>
-	            <ul>
-	                <li><a href="#">Policy</a></li>
-	                <li><a href="#">Terms</a></li>
-	                <li><a href="#">Family Site</a></li>
-	                <li><a href="#">Sitemap</a></li>
-	            </ul>
-	        </div>
-	        <div class="lower">
-	            <address>
-	                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, facere.<br>
-	                TEL : 031-111-1234 C.P : 010-1234-5678
-	            </address>
-	            <p>
-	                2020 DOCDELAB &copy; copyright all right reserved.
-	            </p>
-	        </div>
-	    </div>
+	<section>
+		<div class="inner">
+			<form method="post" action="content" accept-charset="UTF-8">
+				<input type="hidden" name="action" value="content_insert"> <input
+					type="hidden" name="writer" value="${name }"> <input
+					type="hidden" name="user_id" value="${id }">
+				<table>
+					<tr>
+						<th>제목</th>
+						<td><input type="text" name="title" maxlength="255" value="">
+						</td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td class="author-label"><label>${name }</label></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td><textarea name="content" rows="10"></textarea></td>
+					</tr>
+				</table>
+
+				<br> <input type="submit" value="저장"> <input
+					type="button" value="취소" onclick="history.back()">
+			</form>
+		</div>
+	</section>
+	<footer>
+		<div class="inner">
+			<div class="upper">
+				<h1>DCODELAB</h1>
+				<ul>
+					<li><a href="#">Policy</a></li>
+					<li><a href="#">Terms</a></li>
+					<li><a href="#">Family Site</a></li>
+					<li><a href="#">Sitemap</a></li>
+				</ul>
+			</div>
+			<div class="lower">
+				<address>
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas,
+					facere.<br> TEL : 031-111-1234 C.P : 010-1234-5678
+				</address>
+				<p>2020 DOCDELAB &copy; copyright all right reserved.</p>
+			</div>
+		</div>
 	</footer>
 
 </body>

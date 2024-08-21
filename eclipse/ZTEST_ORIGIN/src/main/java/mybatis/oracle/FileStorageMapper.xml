@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="FileStorageMapper">
+    <select id="selectAllFileStorage" resultType="home.FileStorage">
+        SELECT * FROM test_filestorage order by num desc
+    </select>
+
+    <select id="selectFileStorageOne" parameterType="String" resultType="home.FileStorage">
+    	select * from test_filestorage where num = #{num}
+    </select>
+    
+    <select id="selectFileStorageCheck" parameterType="String" resultType="boolean">
+    	select count(*) from test_filestorage where num = #{num}
+    </select>
+
+    <insert id="insertFileStorage" parameterType="home.FileStorage">
+    	insert into test_filestorage (num,fname,ftime,fsize,user_id,writer, hits, title, content) 
+    	values (null,#{fname},TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),#{fsize},#{user_id},#{writer},#{hits},#{title},#{content})
+    </insert>
+
+    <update id="updateFileStorage" parameterType="home.FileStorage">
+    	update test_filestorage 
+    	set fname = #{fname}, ftime = TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), fsize = #{fsize} , title = #{title}, content=#{content}
+    	where num = #{num}
+    </update>
+
+    <delete id="deleteFileStorage" parameterType="String">
+        DELETE FROM test_filestorage WHERE num = #{num}
+    </delete>
+    
+    <update id="updateHits" parameterType="home.FileStorage">
+    	update test_filestorage set hits = #{hits} where num = #{num}
+    </update>
+    
+</mapper>
