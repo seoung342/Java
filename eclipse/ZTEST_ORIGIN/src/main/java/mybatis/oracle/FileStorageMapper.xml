@@ -31,6 +31,10 @@
         DELETE FROM test_filestorage WHERE num = #{num}
     </delete>
     
+    <delete id="deleteFileStorageByUser" parameterType="String">
+        DELETE FROM test_filestorage WHERE user_id = #{user_id}
+    </delete>
+    
     <update id="updateHits" parameterType="home.FileStorage">
     	update test_filestorage set hits = #{hits} where num = #{num}
     </update>

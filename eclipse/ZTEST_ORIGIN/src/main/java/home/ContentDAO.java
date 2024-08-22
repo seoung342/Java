@@ -46,6 +46,10 @@ public class ContentDAO {
 	public void deleteContent(int num) {
 		session.delete("ContentMapper.deleteContent", num);
 	}
+	
+	public void deleteContentByUser(String user_id) {
+		session.delete("ContentMapper.deleteContentByUser",user_id);
+	}
 
 
 }

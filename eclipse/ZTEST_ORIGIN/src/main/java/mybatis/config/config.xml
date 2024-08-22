@@ -21,5 +21,6 @@
 		<mapper resource="mybatis/oracle/ContentMapper.xml"/>
 		<mapper resource="mybatis/oracle/AccountMapper.xml"/>
 		<mapper resource="mybatis/oracle/FileStorageMapper.xml"/>
+		<mapper resource="mybatis/oracle/FinanceMapper.xml"/>
 	</mappers>
 </configuration>

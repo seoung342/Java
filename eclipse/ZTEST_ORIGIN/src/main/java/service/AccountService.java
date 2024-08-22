@@ -16,8 +16,12 @@ public class AccountService {
         return accountDAO.selectAllAccount();
     }
 
-    public Account getAccountByNum(Account account) {
+    public Account getAccountOne(Account account) {
         return accountDAO.selectAccountOne(account);
+    }
+    
+    public Account getAccountByNum(String num) {
+        return accountDAO.selectAccountByNum(num);
     }
     
     public boolean getAccountCheck(String id) {

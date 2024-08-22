@@ -39,4 +39,8 @@ public class FileStorageService {
     public void deleteFileStorage(String num) {
     	fileStroageDAO.deleteFileStorage(num);
     }
+    
+    public void deleteFileStorageByUser(String user_id) {
+    	fileStroageDAO.deleteFileStorageByUser(user_id);
+    }
 }

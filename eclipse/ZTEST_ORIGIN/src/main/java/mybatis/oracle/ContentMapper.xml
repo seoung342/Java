@@ -27,6 +27,10 @@
         DELETE FROM test_content WHERE num = #{num}
     </delete>
     
+    <delete id="deleteContentByUser" parameterType="String">
+        DELETE FROM test_content WHERE user_id = #{user_id}
+    </delete>
+    
     <update id="updateHits" parameterType="home.Notice">
     	update test_content set hits = #{hits} where num = #{num}
     </update>

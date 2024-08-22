@@ -28,6 +28,10 @@ public class AccountDAO {
 		return session.selectOne("AccountMapper.selectAccountOne",account);
 	}
 	
+	public Account selectAccountByNum(String num) {
+		return session.selectOne("AccountMapper.selectAccountByNum",num);
+	}
+	
 	public boolean selectAccountCheck(String id) {
 		return session.selectOne("AccountMapper.selectAccountCheck", id);
 	}

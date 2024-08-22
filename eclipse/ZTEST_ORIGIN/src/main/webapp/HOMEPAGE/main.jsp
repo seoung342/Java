@@ -26,6 +26,7 @@
 				<li><a href="location">LOCATION</a></li>
 				<c:if test="${id != null && id eq 'root'}">
 					<li><a href="register_modify">회원 관리</a></li>
+					<li><a href="finance">내 주식 상황</a></li>
 				</c:if>
 			</ul>
 			<ul class="util">

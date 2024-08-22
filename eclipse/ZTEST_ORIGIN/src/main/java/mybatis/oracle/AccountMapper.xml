@@ -12,6 +12,10 @@
     	select * from test_account where id = #{id} and pw = #{pw}
     </select>
     
+    <select id="selectAccountByNum" parameterType="String" resultType="home.Account">
+    	select * from test_account where num = #{num}
+    </select>
+    
     <select id="selectAccountCheck" parameterType="String" resultType="boolean">
     	select count(*) from test_account where id = #{id}
     </select>

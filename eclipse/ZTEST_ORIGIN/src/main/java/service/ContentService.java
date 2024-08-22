@@ -35,4 +35,8 @@ public class ContentService {
     public void deleteContent(int num) {
         contentDAO.deleteContent(num);
     }
+    
+    public void deleteContentByUser(String user_id) {
+        contentDAO.deleteContentByUser(user_id);
+    }
 }

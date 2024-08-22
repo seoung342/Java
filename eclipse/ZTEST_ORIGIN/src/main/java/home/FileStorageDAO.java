@@ -49,4 +49,8 @@ public class FileStorageDAO {
 	public void deleteFileStorage(String num) {
 		session.delete("FileStorageMapper.deleteFileStorage", num);
 	}
+	
+	public void deleteFileStorageByUser(String user_id) {
+		session.delete("FileStorageMapper.deleteFileStorageByUser", user_id);
+	}
 }
