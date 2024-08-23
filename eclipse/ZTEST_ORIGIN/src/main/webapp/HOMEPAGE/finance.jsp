@@ -51,7 +51,7 @@
 		</div>
 	</header>
 	<script>
-	window.onload = function() {
+window.onload = function() {
 		
 	    // JSP에서 JSON 데이터 가져오기
 	    var financeData = `<%= (String) request.getAttribute("finance") %>`;
