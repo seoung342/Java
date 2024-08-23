@@ -52,7 +52,7 @@
 		</div>
 	</header>
 	<script src = "${pageContext.request.contextPath}/HOMEPAGE/js/chart.js"></script>
-	<div id="finance-data" data-json="<c:out value='${finance}' />"></div>
+	<div id="finance-data" data-json="<c:out value='${finance}'/>"></div>
 	<canvas id="myChart" width="400" height="200"></canvas>
     <br><br><br>
     

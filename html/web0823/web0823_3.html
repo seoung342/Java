@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const myProfle = {
+        name: "홍길동",
+        age: 20,
+        job: "도적",
+      };
+      const { name, age, job } = myProfle; // 객체 분할 대입
+      const msg = `나는 ${myProfle.name}이고 ${myProfle.age}살 입니다. 직업은 ${myProfle.job}입니다.`;
+      console.log(msg);
+    </script>
+  </body>
+</html>

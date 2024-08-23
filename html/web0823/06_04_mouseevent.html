@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
     <link rel="stylesheet" href="css/06-03.css" />
+    <title>Document</title>
   </head>
   <body>
     <article id="box"></article>
     <script>
       const box = document.querySelector("#box");
 
-      box.addEventListener("click", function () {
-        box.style.width = "10%";
-        box.style.height = "300px";
+      box.addEventListener("mouseenter", function () {
         box.style.backgroundColor = "hotpink";
-        box.style.border = "none";
-        box.style.transform = "rotate(10deg)";
+      });
+
+      box.addEventListener("mouseleave", function () {
+        box.style.backgroundColor = "aqua";
       });
     </script>
   </body>

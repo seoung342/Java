@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <article id="box"></article>
+    <img
+      id="aircraft"
+      src="aircraft.jpg"
+      alt="Aircraft"
+      style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+      "
+    />
+    <script>
+      const box = document.querySelector("#box");
+      document.addEventListener("DOMContentLoaded", () => {
+        const aircraft = document.getElementById("aircraft");
+        let topPosition = 50;
+        let leftPosition = 50;
+
+        document.addEventListener("keydown", (event) => {
+          const step = 1; // Movement step in pixels
+
+          switch (event.key) {
+            case "ArrowUp":
+              topPosition -= step;
+              break;
+            case "ArrowDown":
+              topPosition += step;
+              break;
+            case "ArrowLeft":
+              leftPosition -= step;
+              break;
+            case "ArrowRight":
+              leftPosition += step;
+              break;
+          }
+
+          aircraft.style.top = `${topPosition}%`;
+          aircraft.style.left = `${leftPosition}%`;
+          aircraft.style.transform = "translate(-50%, -50%)";
+        });
+      });
+    </script>
+  </body>
+</html>
