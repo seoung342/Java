@@ -1,8 +1,7 @@
 window.onload = function() {
 		
 	    // JSP에서 JSON 데이터 가져오기
-	    var financeData = `<%= (String) request.getAttribute("finance") %>`;
-	    
+		var financeData = JSON.parse(document.getElementById('finance-data').getAttribute('data-json'));
 	    // JSON 데이터 파싱
 	    var data = JSON.parse(financeData);
 

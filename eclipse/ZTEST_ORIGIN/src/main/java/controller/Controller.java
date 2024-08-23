@@ -117,12 +117,10 @@ public class Controller extends HttpServlet {
 			view = "/HOMEPAGE/fileStorage_write.jsp";
 		} else if (com.equals("/finance")) {
             List<Finance> finance = financeService.selectAllFinance();
-            System.out.println(finance);
+            
             // JSON 변환
             ObjectMapper objectMapper = new ObjectMapper();
             String json = objectMapper.writeValueAsString(finance);
-            System.out.println("------------");
-            System.out.println(json);
             
             request.setAttribute("finance", json);
             view = "/HOMEPAGE/finance.jsp";

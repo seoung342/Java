@@ -1,6 +1,13 @@
 @charset "utf-8";
 
-h1{
-    color: red;
+p.text1 {
+    border: 1px solid blue;
+}
 
+p.text2{
+    border : 1px solid red;
+}
+
+#text3{
+    border : 1px solid yellow;
 }
