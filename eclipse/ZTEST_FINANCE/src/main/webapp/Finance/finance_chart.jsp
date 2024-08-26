@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!-- chart.js를 사용하기 위햇서 필요 -->
-
+<%@ include file="/Finance/common/header.jsp" %>
 <title>차트</title>
 </head>
 <body>

@@ -9,26 +9,28 @@
     <title>Document</title>
   </head>
   <body>
-    <input type = "text" id = "aaa"/>
-    </button>
+    <input type="text" id="aaa" />
     <button id="btn">클릭</button>
-    <div id ="bbb"></div>
+    <button id="fetchData">FetchData</button>
+    <div id="dataDisplay"></div>
     <script>
       $(document).ready(function () {
         $("#btn").click(function () {
-        const vv = $('#aaa').val();
-          const div = $('#bbb');
-          const div2 = $('<div></div>');
-          const p = $('<p></p>');
-          const button = $('<button>삭제</button>');
-          button.click(function(){
-            div2.remove();
+          const vv = $("#aaa").val();
+          alert(vv);
+        });
+        $("#fetchData").click(function () {
+          $.ajax({
+            url: "http://localhost:4000/posts",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+              $("#dataDisplay").html(JSON.stringify(data));
+            },
+            error: function () {
+              alert("Error fetching data");
+            },
           });
-          p.text(vv);
-          $('#aaa').val("");
-          div2.append(p);
-          p.append(button);
-          div.append(div2);
         });
       });
     </script>
