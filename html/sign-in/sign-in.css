@@ -23,3 +23,13 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.login-container button {
+	width: 100%;
+	padding: 10px;
+	background-color: #28a745;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}

@@ -43,3 +43,5 @@ insert into exchange_rate(hiredate, us_exchange, jp_exchange)
 values (TO_DATE('2024-08-11', 'YYYY-MM-DD'), 1366, 931.44);
 insert into exchange_rate(hiredate, us_exchange, jp_exchange)
 values (TO_DATE('2024-08-18', 'YYYY-MM-DD'), 1354, 917.59);
+insert into exchange_rate(hiredate, us_exchange, jp_exchange)
+values (TO_DATE('2024-08-25', 'YYYY-MM-DD'), 1329, 920.97);

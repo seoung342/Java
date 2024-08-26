@@ -334,4 +334,22 @@ INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_p
 INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('일본 ETF','1489.t',5,2302,2281,11510,11405,to_date('2024-08-18','YYYY-MM-DD'), 'root');
 INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('일본 ETF','1655.t',220,573.05,595.8,126072,131076,to_date('2024-08-18','YYYY-MM-DD'), 'root');
 INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('일본 ETF','2529.t',10,1726,1659,17260,16590,to_date('2024-08-18','YYYY-MM-DD'), 'root');
+2024-08-25
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 ETF', 'VOO', 0.210554, 488.81, 516.16, 102.92, 108.68, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 ETF', 'SCHD', 21.158463, 73.46, 83.44, 1554.35, 1765.39, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 ETF', 'QQQM', 0.546913, 188.31, 197.34, 102.99, 107.93, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 ETF', 'JEPQ', 42.232846, 47.06, 53.85, 1987.64, 2274.08, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 ETF', 'JEPI', 41.407786, 55.19, 58.05, 2285.34, 2403.74, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 주식', 'NVDA', 0.647547, 114.25, 129.24, 73.98, 83.69, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 주식', 'AAPL', 1.89068, 187.26, 226.62, 354.04, 428.46, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 주식', 'GOOGL', 0.203925, 171.58, 165.45, 34.99, 33.74, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 주식', 'AVGO', 0.282538, 159.2, 166.21, 44.98, 46.96, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 주식', 'META', 0.069786, 501.39, 527.47, 34.99, 36.81, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 주식', 'MAIN', 11.621045, 42.9, 49.64, 498.57, 576.87, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 주식', 'MSFT', 0.113009, 433.42, 416.43, 48.98, 47.06, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 주식', 'O', 16.461946, 53.21, 61.14, 875.99, 1006.45, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('미국 주식', 'LMT', 0.065556, 518.49, 554.49, 33.99, 36.35, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('일본 ETF', '1489.t', 5, 2302, 2280, 11510, 11400, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('일본 ETF', '1655.t', 220, 573.05, 586.6, 126072, 129052, '2024-08-25', 'root');
+INSERT INTO test_stock_info (country_type, ticker, amount, purchase_price, now_price, purchase_total, now_total, hiredate, user_id) VALUES ('일본 ETF', '2529.t', 10, 1726, 1674, 17260, 16740, '2024-08-25', 'root');
 */

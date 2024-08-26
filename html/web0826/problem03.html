@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="aaa" />
+    <button>클릭</button>
+    <p id="bbb"></p>
+    <script>
+      const button = document.querySelector("button");
+      button.addEventListener("click", () => {
+        const x = document.querySelector("#aaa");
+        console.log(x.value);
+
+        const y = document.querySelector("#bbb");
+        y.innerText = x.value;
+      });
+    </script>
+  </body>
+</html>

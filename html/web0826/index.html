@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- jquery 사용하기 위한 url -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/div.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type = "text" id = "aaa"/>
+    </button>
+    <button id="btn">클릭</button>
+    <div id ="bbb"></div>
+    <script>
+      $(document).ready(function () {
+        $("#btn").click(function () {
+        const vv = $('#aaa').val();
+          const div = $('#bbb');
+          const div2 = $('<div></div>');
+          const p = $('<p></p>');
+          const button = $('<button>삭제</button>');
+          button.click(function(){
+            div2.remove();
+          });
+          p.text(vv);
+          $('#aaa').val("");
+          div2.append(p);
+          p.append(button);
+          div.append(div2);
+                });
+      });
+    </script>
+  </body>
+</html>
