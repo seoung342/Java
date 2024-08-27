@@ -18,8 +18,12 @@ public class FinanceDAO {
 		// default는 false이다.
 		session = sqlsession_f.openSession(true);
 	}
-	public List<Finance> selectAllFinance() {
-		return session.selectList("FinanceMapper.selectAllFinance");
+	public List<Finance> selectAllChart() {
+		return session.selectList("FinanceMapper.selectAllChart");
     }
+	
+	public List<Finance> selectAllHiredate(){
+		return session.selectList("FinanceMapper.selectAllHiredate");
+	}
 	
 }

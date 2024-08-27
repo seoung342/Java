@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #data,
+      #newContainer {
+        width: 250px;
+        height: 100px;
+        border: 1px dotted red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="data">bbb</div>
+    <div id="newContainer">drop here</div>
+    <p draggable="true" id="item">aaa</p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#data, #newContainer").on("dragover", function (e) {
+          e.preventDefault();
+        });
+
+        $("#item").on("dragstart", function (e) {
+          e.originalEvent.dataTransfer.effectAllowed = "move";
+          e.originalEvent.dataTransfer.setData("text", e.target.id);
+        });
+
+        $("#data, #newContainer").on("drop", function (e) {
+          e.preventDefault();
+          const data = e.originalEvent.dataTransfer.getData("text");
+          $(this).append($("#" + data));
+        });
+      });
+    </script>
+  </body>
+</html>

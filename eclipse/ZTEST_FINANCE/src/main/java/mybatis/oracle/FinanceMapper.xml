@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="FinanceMapper">
-	<select id="selectAllFinance" resultType="home.Finance">
+	<select id="selectAllChart" resultType="home.Finance">
 		SELECT
 			TO_CHAR(t.hiredate, 'YYYY-MM-DD') AS hiredate,
 			SUM(CASE
@@ -19,5 +19,9 @@
 			JOIN exchange_rate e ON t.hiredate = e.hiredate
 			GROUP BY TO_CHAR(t.hiredate, 'YYYY-MM-DD')
 			ORDER BY TO_CHAR(t.hiredate, 'YYYY-MM-DD') ASC
+	</select>
+	
+	<select id = "selectAllHiredate" resultType="home.Finance">
+		select to_char(hiredate,'YYYY-MM-DD') as hiredate from test_stock_info group by hiredate order by hiredate
 	</select>
 </mapper>

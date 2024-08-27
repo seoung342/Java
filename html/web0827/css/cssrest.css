@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+article{
+    border: 1px solid red;
+}
+ul li {
+    border: 1px solid blue;
+}

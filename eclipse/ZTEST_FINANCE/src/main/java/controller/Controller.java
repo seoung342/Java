@@ -49,6 +49,10 @@ public class Controller extends HttpServlet {
 			view = "/Finance/02_login.jsp";
 		} else if (com.equals("/register")) {
 			view = "/Finance/03_register.jsp";
+		} else if (com.equals("/list")){
+			List<Finance> finance = financeService.selectAllHiredate();
+			request.setAttribute("list", finance);
+			view = "/Finance/04_list.jsp";
 		}
 
 		else if (com.equals("/logout")) {
@@ -56,7 +60,7 @@ public class Controller extends HttpServlet {
 			session.invalidate();
 			view = "/Finance/01_main.jsp";
 		} else if (com.equals("/finance_chart")) { // 차트 보기
-			List<Finance> finance = financeService.selectAllFinance();
+			List<Finance> finance = financeService.selectAllChart();
 
 			// JSON 변환
 			ObjectMapper objectMapper = new ObjectMapper();

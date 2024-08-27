@@ -12,8 +12,13 @@ public class FinanceService {
 		financeDAO = new FinanceDAO();
 	}
 	
-	public List<Finance> selectAllFinance() {
-        return financeDAO.selectAllFinance();
+	public List<Finance> selectAllChart() {
+        return financeDAO.selectAllChart();
     }
+	
+	public List<Finance> selectAllHiredate(){
+		return financeDAO.selectAllHiredate();
+	}
+	
 	
 }
