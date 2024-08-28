@@ -5,9 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="test.css" />
+    <style>
+      * {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+ul, ol {
+	list-style: none;
+}
+
+/* header */
+header {
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+}
+
+header .inner {
+	width: 1180px;
+	height: 120px;
+	margin: 0px auto;
+	position: relative; /*자식 absolute 요소의 기준점 설정*/
+}
+
+header .inner h1 {
+	position: absolute;
+	left: 0px;
+	bottom: 15px;
+}
+
+header .inner h1 a {
+	font: bold 24px/1 "arial";
+	color: #444;
+}
+
+header .inner .util {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+}
+
+header .inner .util li {
+	float: left;
+}
+
+header .inner .util li a {
+	display: block;
+	font: 12px/1 "arial";
+	color: #999;
+	padding: 0px 10px;
+}
+
+header .inner #gnb {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+header .inner #gnb li {
+	float: left;
+}
+
+header .inner #gnb li a {
+	display: block; /*인라인 요소는 block설정하여 크기를 조절가능*/
+	font: bold 15px/1 "arial";
+	color: #555;
+	padding: 20px 40px;
+	transition: all 0.5s;
+}
+
+header .inner #gnb li a:hover {
+	background: #555;
+	color: #fff;
+}
+    </style>
   </head>
   <body>
-    <p>매주 일요일 NH증권, 토스 증권 주식 목록 정리하기<br /></p>
-    <p>매달 마지막 날에 모든 주식 목록 정리하기, 지수 포함</p>
+    <header>
+      <div class="inner">
+        <h1>
+          <a href="main">Finance</a>
+        </h1>
+    
+        <ul id="gnb">
+          <li><a href="list">목록</a></li>
+          <li><a href="finance_chart">차트</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+        </ul>
+    
+        <ul class="util">
+          <c:choose>
+            <c:when test="${id != null}">
+              <li><a>${name}</a></li>
+              <li><a href="myinfo">내 정보</a></li>
+              <li><a href="logout">로그아웃</a></li>
+            </c:when>
+            <c:otherwise>
+              <li><a href="login">로그인</a></li>
+              <li><a href="register">회원가입</a></li>
+            </c:otherwise>
+          </c:choose>
+        </ul>
+      </div>
   </body>
 </html>

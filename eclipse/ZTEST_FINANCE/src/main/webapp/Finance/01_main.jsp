@@ -9,8 +9,7 @@
 </head>
 <body>
 	<div class="container">
-		<p> 매주 일요일 NH증권, 토스 증권 주식 목록 정리하기<br></p>
-		<P> 매달 마지막 날에 모든 주식 목록 정리하기, 지수 포함</P>
+		
 	
 	
 	</div>
