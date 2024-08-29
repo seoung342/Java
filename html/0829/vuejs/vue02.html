@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Vue.js와 연결하는 요소-->
+    <div id="app">
+      {{message}}
+      <button @click="changeMessage">Click me</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script>
+      // Vue 인스턴스
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue!",
+        },
+        methods: {
+          changeMessage() {
+            this.message = "Button Clicked!!";
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
