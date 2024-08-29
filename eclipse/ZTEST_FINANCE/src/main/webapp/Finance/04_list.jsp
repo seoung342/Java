@@ -5,13 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/Finance/css/01_main.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/Finance/css/04_list"/>
 <title>목록</title>
+<style>
+body .div_list{
+	padding: 100px;
+	border: 1px solid red;
+}
+
+</style>
 </head>
 <body>
 	<c:forEach var="list" items="${list}">
 		
-		<div>${list.hiredate }</div>
+		<div class ="div_list">${list.hiredate }</div>
 	</c:forEach>
 </body>
 </html>
