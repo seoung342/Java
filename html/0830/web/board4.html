@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시판</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">게시판</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>내용</th>
+          <th>작성자</th>
+          <th>작성일자</th>
+          <th>액션</th>
+        </tr>
+      </thead>
+      <tbody id="posts"></tbody>
+    </table>
+    <nav>
+      <ul class="pagination">
+        <li class="page-item">
+          <button class="page-link" onclick="prevPage()">이전</button>
+        </li>
+        <li class="page-item">
+          <span class="page-link" id="page-info"></span>
+        </li>
+        <li class="page-item">
+          <button class="page-link" onclick="nextPage()">다음</button>
+        </li>
+      </ul>
+    </nav>
+    <h2 class="mt-5">새 게시물 작성</h2>
+    <form id="postForm">
+      <input type="hidden" id="postId" />
+      <div class="form-group">
+        <label for="title">제목:</label>
+        <input type="text" id="title" class="form-control" required />
+      </div>
+      <div class="form-group">
+        <label for="content">내용:</label>
+        <textarea id="content" class="form-control" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="author">작성자:</label>
+        <input type="text" id="author" class="form-control" required />
+      </div>
+      <button type="submit" class="btn btn-primary">저장</button>
+    </form>
+  </div>
+
+  <script>
+    let currentPage = 1;
+    const postsPerPage = 5;
+
+    async function fetchPosts(page = 1) {
+      const response = await fetch(`http://localhost:3000/posts?_page=${page}&_limit=${postsPerPage}`);
+      const posts = await response.json();
+      const totalPosts = response.headers.get('X-Total-Count');
+      const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+      const postsContainer = document.getElementById('posts');
+      postsContainer.innerHTML = posts.map((post, index) => `
+        <tr data-id="${post.id}">
+          <td>${(page - 1) * postsPerPage + index + 1}</td>
+          <td>${post.title}</td>
+          <td>${post.content}</td>
+          <td>${post.author}</td>
+          <td>${new Date(post.date).toLocaleDateString()}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" onclick="editPost(${post.id})">수정</button>
+            <button class="btn btn-danger btn-sm" onclick="deletePost(${post.id})">삭제</button>
+          </td>
+        </tr>
+      `).join('');
+
+      document.getElementById('page-info').innerText = `페이지 ${page} / ${totalPages}`;
+      currentPage = page;
+    }
+
+    async function addPost(post) {
+      await fetch('http://localhost:3000/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+      });
+      fetchPosts(currentPage);
+    }
+
+    async function updatePost(id, post) {
+      await fetch(`http://localhost:3000/posts/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+      });
+      fetchPosts(currentPage);
+    }
+
+    async function deletePost(id) {
+      await fetch(`http://localhost:3000/posts/${id}`, {
+        method: 'DELETE'
+      });
+      fetchPosts(currentPage);
+    }
+
+    function editPost(id) {
+      const postElement = document.querySelector(`tr[data-id="${id}"]`);
+      const title = postElement.querySelector('td:nth-child(2)').innerText;
+      const content = postElement.querySelector('td:nth-child(3)').innerText;
+      const author = postElement.querySelector('td:nth-child(4)').innerText;
+      document.getElementById('postId').value = id;
+      document.getElementById('title').value = title;
+      document.getElementById('content').value = content;
+      document.getElementById('author').value = author;
+    }
+
+    document.getElementById('postForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const id = document.getElementById('postId').value;
+      const title = document.getElementById('title').value;
+      const content = document.getElementById('content').value;
+      const author = document.getElementById('author').value;
+      const date = new Date().toISOString();
+      const post = { title, content, author, date };
+
+      if (id) {
+        await updatePost(id, post);
+      } else {
+        await addPost(post);
+      }
+
+      document.getElementById('postForm').reset();
+      document.getElementById('postId').value = '';
+    });
+
+    function prevPage() {
+      if (currentPage > 1) {
+        fetchPosts(currentPage - 1);
+      }
+    }
+
+    function nextPage() {
+      fetchPosts(currentPage + 1);
+    }
+
+    fetchPosts();
+  </script>
+</body>
+</html>

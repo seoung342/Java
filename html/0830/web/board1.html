@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시판</title>
+  <style>
+    .post { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
+    .post h2 { margin: 0; }
+    .post p { margin: 5px 0; }
+    .pagination { margin: 20px 0; }
+    .pagination button { margin: 0 5px; }
+  </style>
+</head>
+<body>
+  <h1>게시판</h1>
+  <div id="posts"></div>
+  <div class="pagination">
+    <button onclick="prevPage()">이전</button>
+    <span id="page-info"></span>
+    <button onclick="nextPage()">다음</button>
+  </div>
+  <h2>새 게시물 작성</h2>
+  <form id="postForm">
+    <input type="hidden" id="postId" />
+    <div>
+      <label for="title">제목:</label>
+      <input type="text" id="title" required />
+    </div>
+    <div>
+      <label for="content">내용:</label>
+      <textarea id="content" required></textarea>
+    </div>
+    <button type="submit">저장</button>
+  </form>
+
+  <script>
+    let currentPage = 1;
+    const postsPerPage = 5;
+
+    async function fetchPosts(page = 1) {
+      const response = await fetch(`http://localhost:3000/posts?_page=${page}&_limit=${postsPerPage}`);
+      const posts = await response.json();
+      const totalPosts = response.headers.get('X-Total-Count');
+      const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+      const postsContainer = document.getElementById('posts');
+      postsContainer.innerHTML = posts.map(post => `
+        <div class="post" data-id="${post.id}">
+          <h2>${post.title}</h2>
+          <p>${post.content}</p>
+          <button onclick="editPost(${post.id})">수정</button>
+          <button onclick="deletePost(${post.id})">삭제</button>
+        </div>
+      `).join('');
+
+      document.getElementById('page-info').innerText = `페이지 ${page} / ${totalPages}`;
+      currentPage = page;
+    }
+
+    async function addPost(post) {
+      await fetch('http://localhost:3000/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+      });
+      fetchPosts(currentPage);
+    }
+
+    async function updatePost(id, post) {
+      await fetch(`http://localhost:3000/posts/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+      });
+      fetchPosts(currentPage);
+    }
+
+    async function deletePost(id) {
+      await fetch(`http://localhost:3000/posts/${id}`, {
+        method: 'DELETE'
+      });
+      fetchPosts(currentPage);
+    }
+
+    function editPost(id) {
+      const postElement = document.querySelector(`.post[data-id="${id}"]`);
+      const title = postElement.querySelector('h2').innerText;
+      const content = postElement.querySelector('p').innerText;
+      document.getElementById('postId').value = id;
+      document.getElementById('title').value = title;
+      document.getElementById('content').value = content;
+    }
+
+    document.getElementById('postForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const id = document.getElementById('postId').value;
+      const title = document.getElementById('title').value;
+      const content = document.getElementById('content').value;
+      const post = { title, content };
+
+      if (id) {
+        await updatePost(id, post);
+      } else {
+        await addPost(post);
+      }
+
+      document.getElementById('postForm').reset();
+      document.getElementById('postId').value = '';
+    });
+
+    function prevPage() {
+      if (currentPage > 1) {
+        fetchPosts(currentPage - 1);
+      }
+    }
+
+    function nextPage() {
+      fetchPosts(currentPage + 1);
+    }
+
+    fetchPosts();
+  </script>
+</body>
+</html>
