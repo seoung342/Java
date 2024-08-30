@@ -24,4 +24,8 @@
 	<select id = "selectAllHiredate" resultType="home.Finance">
 		select to_char(hiredate,'YYYY-MM-DD') as hiredate from test_stock_info group by hiredate order by hiredate
 	</select>
+	
+	<select id = "selectAllByHiredate" parameterType="String" resultType="home.Finance">
+		select * from test_stock_info where hiredate = #{date}
+	</select>
 </mapper>

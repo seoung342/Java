@@ -53,7 +53,7 @@ public class Controller extends HttpServlet {
 			List<Finance> finance = financeService.selectAllHiredate();
 			request.setAttribute("list", finance);
 			view = "/Finance/04_list.jsp";
-		}
+		} 
 
 		else if (com.equals("/logout")) {
 			HttpSession session = request.getSession();
@@ -113,6 +113,16 @@ public class Controller extends HttpServlet {
 				accountService.insertAccount(account);
 				response.sendRedirect(request.getContextPath() + "/");
 			}
+		} else if (action.equals("listByHiredate")) {
+			String hiredate = request.getParameter("hiredate");
+	        List<Finance> finance = financeService.selectAllByHiredate(hiredate);
+	        
+	        ObjectMapper objectMapper = new ObjectMapper();
+			String json = objectMapper.writeValueAsString(finance);
+			
+			response.setContentType("application/json; charset=UTF-8");
+	        response.getWriter().write(objectMapper.writeValueAsString(json));
+	        
 		}
 	}
 		

@@ -20,5 +20,9 @@ public class FinanceService {
 		return financeDAO.selectAllHiredate();
 	}
 	
+	public List<Finance> selectAllByHiredate(String date){
+		return financeDAO.selectAllByHiredate(date);
+	}
+	
 	
 }

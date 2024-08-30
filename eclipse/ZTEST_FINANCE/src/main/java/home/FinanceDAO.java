@@ -26,4 +26,8 @@ public class FinanceDAO {
 		return session.selectList("FinanceMapper.selectAllHiredate");
 	}
 	
+	public List<Finance> selectAllByHiredate(String date){
+		return session.selectList("FinanceMapper.selectAllByHiredate",date);
+	}
+	
 }

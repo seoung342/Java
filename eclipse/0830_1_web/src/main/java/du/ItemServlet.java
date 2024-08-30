@@ -48,7 +48,7 @@ public class ItemServlet extends HttpServlet {
         Item newItem = gson.fromJson(reader, Item.class);
         Item createdItem = DatabaseUtil.addItem(newItem.getName());
 
-        resp.setContentType("application/json");
+        resp.setContentType("application/json; charset=utf-8");
         PrintWriter out = resp.getWriter();
         out.print(gson.toJson(createdItem));
         out.flush();
