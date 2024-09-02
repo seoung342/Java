@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue.js sample</title>
+		<link rel="stylesheet" href="style.css" >
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+	</head>
+	
+	<body>
+		<h2>오브젝트 배열 데이터를 리스트로 표시하는 예제 </h2>
+		<div id="app">
+			<ul>
+				<li v-for="item in objArray">{{ item.name }} \{{ item.price }}</li>
+			</ul>
+		</div>
+
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					objArray: [
+						{name: '쨈빵', price: 1000},
+						{name: '멜론빵', price: 1200},
+						{name: '크로와사', price: 1500}
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,15 @@
+<html>
+<head>
+    <script>
+        var myArray = ['one','two','three','four','five'];
+        function sortData(listdata) {
+            listdata.sort(function(a,b) {
+                return (a < b ? -1 : 1);
+            });
+        }
+        console.log(myArray);
+        sortData(myArray);
+        console.log(myArray);
+    </script>
+</head>
+</html>

@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Vue.js sample</title>   CDN에서 Vue.js 를 읽어들임
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p> {{ myText }} </p>  Vue.js와 연결하는 요소
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            myText: 'Hello!!!'  //Vue 인스턴스
+        }
+    })
+</script>
+</body>
+</html>
