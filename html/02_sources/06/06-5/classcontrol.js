@@ -24,18 +24,18 @@ wrap.addEventListener("click", () => {
   wrap.classList.add("on");
 */
 
-/* 자바스크립트로 클래스 제어하기 5
-wrap.addEventListener("click", () => { 
+  /* 자바스크립트로 클래스 제어하기 5
+  wrap.addEventListener("click", () => { 
   let isOn = wrap.classList.contains("on");
   console.log(isOn); 
 
   if(isOn){
-      wrap.classList.remove("on");
+  wrap.classList.remove("on");
   }else{
-      wrap.classList.add("on");
+  wrap.classList.add("on");
   }
-});
-*/
+  });
+  */
 
 /* 자바스크립트로 클래스 제어하기 6
 wrap.addEventListener("click", () => { 
