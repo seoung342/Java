@@ -11,8 +11,8 @@
 		<ul id="gnb">
 			<li><a href="list">목록</a>
 				<ul class="submenu">
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
+					<li><a href="ratio">ratio</a></li>
+					<li><a href="balance">balance</a></li>
 					<li><a href="#">3</a></li>
 				</ul></li>
 			<li><a href="finance_chart">차트</a>

@@ -54,8 +54,12 @@ public class Controller extends HttpServlet {
 			request.setAttribute("list", finance);
 			view = "/Finance/04_list.jsp";
 		} 
-
-		else if (com.equals("/logout")) {
+		
+		else if (com.equals("/balance")) {
+			view = "/Finance/balance.jsp";
+		} else if (com.equals("/ratio")) {
+			view = "/Finance/ratio.jsp";
+		} else if (com.equals("/logout")) {
 			HttpSession session = request.getSession();
 			session.invalidate();
 			view = "/Finance/01_main.jsp";
