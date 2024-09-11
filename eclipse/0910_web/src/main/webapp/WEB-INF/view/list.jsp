@@ -52,7 +52,7 @@
 <br>
 <div style="width:680px; text-align:center;">
     <c:forEach var="pgn" items="${pgnList}">
-         <a class="pgn" href="list?page=${pgn.pageNo}">
+         <a class="pgn" href="list.do?page=${pgn.pageNo}">
              <c:choose>
                  <c:when test="${pgn.curPage}">
                      <u>${pgn.display}</u>
