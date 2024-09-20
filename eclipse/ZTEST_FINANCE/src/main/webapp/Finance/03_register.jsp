@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Finance/css/register.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Finance/css/03_register.css">
     <title>회원 가입</title>
 </head>
 <body>

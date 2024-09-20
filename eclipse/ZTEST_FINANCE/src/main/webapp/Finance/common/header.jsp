@@ -11,8 +11,8 @@
 		<ul id="gnb">
 			<li><a href="list">목록</a>
 				<ul class="submenu">
-					<li><a href="ratio">ratio</a></li>
-					<li><a href="balance">balance</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
 					<li><a href="#">3</a></li>
 				</ul></li>
 			<li><a href="finance_chart">차트</a>
@@ -21,8 +21,18 @@
 					<li>2</li>
 					<li>3</li>
 				</ul></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
+			<li><a href="#">3</a>
+			<ul class="submenu">
+					<li>1</li>
+					<li>2</li>
+					<li>3</li>
+				</ul></li>
+			<li><a href="#">유용한 툴</a>
+			<ul class="submenu">
+					<li><a href="ratio">ratio</a></li>
+					<li><a href="balance">balance</a></li>
+					<li><a href="day_money">day_money</a></li>
+				</ul></li>
 		</ul>
 
 		<ul class="util">

@@ -54,8 +54,9 @@ public class Controller extends HttpServlet {
 			request.setAttribute("list", finance);
 			view = "/Finance/04_list.jsp";
 		} 
-		
-		else if (com.equals("/balance")) {
+		else if (com.equals("/day_money")) {
+			view = "/Finance/day_money.jsp";
+		} else if (com.equals("/balance")) {
 			view = "/Finance/balance.jsp";
 		} else if (com.equals("/ratio")) {
 			view = "/Finance/ratio.jsp";

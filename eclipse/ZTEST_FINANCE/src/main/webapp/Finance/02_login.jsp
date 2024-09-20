@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/Finance/css/login.css"><!-- 절대 경로 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/Finance/css/02_login.css"><!-- 절대 경로 -->
 <title>Login Page</title>
 </head>
 <body>
