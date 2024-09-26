@@ -236,6 +236,7 @@
         }
 
         calculatePercent(); // 총계가 업데이트된 후 퍼센트 계산 호출
+        dailyMoney();
       }
 
       // 버튼을 눌러서 새로운 행을 추가
@@ -282,80 +283,29 @@
         }
       });
 
-      // tar_ratio에 따라서 daily_money를 계산하는 함수
-      function updateDailyMoney() {
-        const totalInputs = Array.from(document.querySelectorAll(".total"));
-        const tarRatioInputs = Array.from(
-          document.querySelectorAll(".tar_ratio")
+      function dailyMoney() {
+        const day = document.querySelectorAll(".fix_date");
+        var date = parseInt(day.value);
+        var totals = Array.from(document.querySelectorAll(".total")).map(
+          (input) => parseFloat(input.value) || 0
         );
-        const dailyMoneyInputs = Array.from(
-          document.querySelectorAll(".daily_money")
+        var totalSum = totals.reduce((acc, total) => acc + total, 0);
+
+        const moneyInput = document.getElementById("money");
+        var a = parseInt(moneyInput.value);
+        totalSum += a;
+        console.log(totalSum);
+
+        var tar_ratio = Array.from(document.querySelectorAll(".tar_ratio")).map(
+          (input) => parseFloat(input.value) || 0
         );
-
-        // 기간을 가져오기 (예: 총 일수)
-        const totalDays = totalInputs.length > 0 ? totalDays : 1; // 기본값 1일
-
-        // 전체 tar_ratio 합계
-        let totalTarRatio = 0;
-        tarRatioInputs.forEach((input) => {
-          totalTarRatio += parseFloat(input.value) || 0;
-        });
-
-        totalInputs.forEach((input, index) => {
-          const total = parseFloat(input.value) || 0;
-          const tarRatio = parseFloat(tarRatioInputs[index].value) || 0;
-
-          // 비율에 따른 daily_money 계산
-          if (totalTarRatio > 0 && total > 0) {
-            const requiredDailyMoney =
-              (total * (tarRatio / totalTarRatio)) / totalDays;
-            dailyMoneyInputs[index].value = requiredDailyMoney.toFixed(2); // 소수점 두 자리
-          } else {
-            dailyMoneyInputs[index].value = "0.00"; // 비율이나 총액이 없을 경우
-          }
-        });
-      }
-
-      // tar_ratio에 따라서 daily_money를 계산하는 함수
-      function updateDailyMoney() {
-        const totalInputs = Array.from(document.querySelectorAll(".total"));
-        const tarRatioInputs = Array.from(
-          document.querySelectorAll(".tar_ratio")
-        );
-        const dailyMoneyInputs = Array.from(
-          document.querySelectorAll(".daily_money")
-        );
-
-        // 기간을 가져오기 (예: 총 일수)
-        const totalDays = totalInputs.length > 0 ? totalDays : 1; // 기본값 1일
-
-        // 전체 tar_ratio 합계
-        let totalTarRatio = 0;
-        tarRatioInputs.forEach((input) => {
-          totalTarRatio += parseFloat(input.value) || 0;
-        });
-
-        totalInputs.forEach((input, index) => {
-          const total = parseFloat(input.value) || 0;
-          const tarRatio = parseFloat(tarRatioInputs[index].value) || 0;
-
-          // 비율에 따른 daily_money 계산
-          if (totalTarRatio > 0 && total > 0) {
-            const requiredDailyMoney =
-              (total * (tarRatio / totalTarRatio)) / totalDays;
-            dailyMoneyInputs[index].value = requiredDailyMoney.toFixed(2); // 소수점 두 자리
-          } else {
-            dailyMoneyInputs[index].value = "0.00"; // 비율이나 총액이 없을 경우
-          }
-        });
-      }
-
-      // tar_ratio가 바뀔 때마다 daily_money 업데이트
-      document.addEventListener("input", function (event) {
-        if (event.target.classList.contains("tar_ratio")) {
-          updateDailyMoney();
+        var dailmoney = document.querySelectorAll(".daily_money");
+        for (var i = 0; i < totalRatio.length; i++) {
+          var tar = tar_ratio[i];
+          var dmoney = (totalSum * tar) / tarTotal / date;
+          dailmoney[i].value = dmoney;
         }
-      });
+      }
     </script>
   </body>
 </html>
