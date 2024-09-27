@@ -30,7 +30,7 @@ public class ItemDAO {
 	}
 	
 	// 물건 갯수
-	public int itemCount() {
+	public int countItem() {
 		Connection conn = null;
 		try {
 			conn = dataSource.getConnection();

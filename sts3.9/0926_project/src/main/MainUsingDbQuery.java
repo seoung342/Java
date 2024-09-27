@@ -52,6 +52,15 @@ public class MainUsingDbQuery {
 				} else if ( command.startsWith("orderItem ")) {
 					processOrderItem(dbQuery, command.split(" "));
 					continue;
+				} else if ( command.startsWith("cancelOrder ")) {
+					processCancelOrder(dbQuery, command.split(" "));
+					continue;
+				} else if ( command.startsWith("find all orders")) {
+					processAllOrders(dbQuery, command.split(" "));
+					continue;
+				}else if ( command.startsWith("find all order item")) {
+					processAllOrderItem(dbQuery, command.split(" "));
+					continue;
 				} else if ( command.startsWith("help")) {
 					printHelp();
 					continue;
@@ -64,6 +73,8 @@ public class MainUsingDbQuery {
 			ctx.close();
 		}
 	}
+	
+	// 상품 추가
 	private static void processAddItem(DbQuery dbQuery, String[] arg) {
 		if(arg.length != 5) {
 			printHelp();
@@ -77,6 +88,8 @@ public class MainUsingDbQuery {
 		dbQuery.addItem(item_name, Integer.parseInt(item_price), Integer.parseInt(item_amount));
 		
 	}
+	
+	// 회원 추가
 	private static void processAddMember(DbQuery dbQuery, String[] arg) {
 		if(arg.length != 6) {
 			printHelp();
@@ -90,24 +103,28 @@ public class MainUsingDbQuery {
 		
 		dbQuery.addMember(name, city, street, zipcode);
 	}
+	
+	// 모든 상품 확인
 	private static void processFindAllItem(DbQuery dbQuery) {
 		List<Item> items = dbQuery.findAllItem();
-		int count = dbQuery.itemCount();
+		int count = dbQuery.countItem();
 		System.out.println("총 아이템 수: " + count);
 		for (Item item : items) {
 			System.out.println(item);
 		}
 	}
 	
+	// 모든 회원 확인
 	private static void processFindAllMember(DbQuery dbQuery) {
 		List<Member> members = dbQuery.findAllMember();
-		int count = dbQuery.itemMember();
+		int count = dbQuery.countMember();
 		System.out.println("총 회원 수: " + count);
 		for (Member member : members) {
 			System.out.println(member);
 		}
 	}
 	
+	// 주문 상품 날짜로 확인
 	private static void processMemberOrdersDate(DbQuery dbQuery, String[] arg) {
 		if(arg.length != 3) {
 			printHelp();
@@ -125,7 +142,8 @@ public class MainUsingDbQuery {
 	        System.out.print("   배달 장소 : " + firstOrder.get("city") + " " + firstOrder.get("street") + " " + firstOrder.get("zipcode"));
 	        System.out.println("   주문 날짜 : " + firstOrder.get("orderDate"));
 	        for (Map<String, Object> order : orders) {
-	            System.out.print("   제품 : " + order.get("itemName"));
+	        	System.out.print("    주문 번호 : " + order.get("orderId"));
+	            System.out.print(", 제품 : " + order.get("itemName"));
 	            System.out.print(", 가격: " + order.get("price"));
 	            System.out.print(", 수량: " + order.get("count"));
 	            System.out.println(", 주문 가격: " + order.get("orderPrice"));
@@ -135,6 +153,7 @@ public class MainUsingDbQuery {
 	    }
 	}
 	
+	// 회원의 모든 주문 정보
 	private static void processMemberOrdersAll(DbQuery dbQuery, String[] arg) {
 		if(arg.length != 2) {
 			printHelp();
@@ -150,7 +169,8 @@ public class MainUsingDbQuery {
 	        System.out.print("   회원 이름: " + memberName);
 	        System.out.println("   배달 장소 : " + firstOrder.get("city") + " " + firstOrder.get("street") + " " + firstOrder.get("zipcode"));
 	        for (Map<String, Object> order : orders) {
-	            System.out.print("   제품 : " + order.get("itemName"));
+	        	System.out.print("    주문 번호 : " + order.get("orderId"));
+	            System.out.print(", 제품 : " + order.get("itemName"));
 	            System.out.print(", 가격: " + order.get("price"));
 	            System.out.print(", 수량: " + order.get("count"));
 	            System.out.print(", 주문 가격: " + order.get("orderPrice"));
@@ -159,6 +179,7 @@ public class MainUsingDbQuery {
 	    }
 	}
 	
+	// 상품 주문
 	private static void processOrderItem(DbQuery dbQuery, String[] arg) {
 		if(arg.length != 4) {
 			printHelp();
@@ -170,18 +191,58 @@ public class MainUsingDbQuery {
 		dbQuery.orderItem(Long.parseLong(member_id), Long.parseLong(item_id), Integer.parseInt(count));
 	}
 	
+	// 주문, 상품 취소
+	private static void processCancelOrder(DbQuery dbQuery, String[] arg) {
+		if(arg.length != 2) {
+			printHelp();
+			return;
+		}
+		String order_id = arg[1];
+		dbQuery.cancelOrder(Long.parseLong(order_id));
+	}
+	
+	// 모든 주문 정보
+	private static void processAllOrders(DbQuery dbQuery, String[] arg) {
+		if(arg.length != 3) {
+			printHelp();
+			return;
+		}
+		
+		 List<Map<String, Object>> orders = dbQuery.allOrders();
+		    for (Map<String, Object> order : orders) {
+		        System.out.println(order);
+		    }
+	}
+	
+	// 모든 주문 상품 정보
+	private static void processAllOrderItem(DbQuery dbQuery, String[] arg) {
+		if(arg.length != 4) {
+			printHelp();
+			return;
+		}
+		
+		List<Map<String, Object>> orders = dbQuery.allOrderItem();;
+	    for (Map<String, Object> order : orders) {
+	        System.out.println(order);
+	    }
+	}
+	
+	// 도움말
 	private static void printHelp() {
 		System.out.println();
 		System.out.println("--------명령어 사용법--------");
-		System.out.println("help : 명령어 사용법");
-		System.out.println("exit : 프로그램 종료");
-		System.out.println("add Item : 아이템 추가 ( 이름, 가격, 갯수 )");
-		System.out.println("add member : 회원 추가 ( 이름, city, street, zipcode )");
-		System.out.println("find item : 모든 아이템 정보");
-		System.out.println("find all member : 모든 회원 정보");
-		System.out.println("fmoa member_name : 회원 모든 주문 정보 확인 ( 이름 ) find member orders all");
-		System.out.println("fmod member_name date : 회원 주문 정보 확인 ( 이름 날짜 ) find member orders date");
-		System.out.println("orderItem member_id item_id count : 물건 주문 방법 ( 회원_아이디 물건_번호 갯수 )");
+		System.out.println("help >> 명령어 사용법");
+		System.out.println("exit >> 프로그램 종료");
+		System.out.println("find item >> 모든 아이템 정보");
+		System.out.println("find all member >> 모든 회원 정보");
+		System.out.println("find all orders >> 모든 주문 정보");
+		System.out.println("find all order item >> 모든 주문 상품 정보");
+		System.out.println("add item name price amount >> 아이템 추가 ( 이름, 가격, 갯수 )");
+		System.out.println("add member name city street zipcode >> 회원 추가 ( 이름, city, street, zipcode )");
+		System.out.println("orderItem member_id item_id count >> 물건 주문 ( 회원_아이디 물건_번호 갯수 )");
+		System.out.println("cancelOrder order_id >> 주문 취소 ( 주문_번호 )");
+		System.out.println("fmoa member_name >> 회원 모든 주문 정보 확인 ( 이름 ) find member orders all");
+		System.out.println("fmod member_name date >> 회원 주문 정보 확인 ( 이름 날짜 ) find member orders date");
 		System.out.println();
 	}
 }
