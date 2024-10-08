@@ -247,14 +247,26 @@
         for (var i = 0; i < 7; i++) {
           var newCell = newRow.insertCell();
           var input = document.createElement("input");
+          input.style.width = "100%";
+          input.style.boxSizing = "border-box";
+          input.style.padding = "5px";
+          input.style.border = "1px solid #ccc";
+          input.style.borderRadius = "4px";
+
           if (i === 1) {
             input.type = "number";
             input.className = "price";
-            input.addEventListener("input", calculateSum); // 가격 입력 시 총계 계산
+            input.addEventListener("input", function () {
+              calculateSum();
+              dailyMoney(); // 가격 입력 시 daily_money 업데이트
+            }); // 가격 입력 시 총계 계산
           } else if (i === 2) {
             input.type = "number";
             input.className = "amount";
-            input.addEventListener("input", calculateSum); // 개수 입력 시 총계 계산
+            input.addEventListener("input", function () {
+              calculateSum();
+              dailyMoney(); // 개수 입력 시 daily_money 업데이트
+            }); // 개수 입력 시 총계 계산
           } else if (i === 3) {
             input.type = "number";
             input.className = "total";
@@ -266,6 +278,7 @@
           } else if (i === 5) {
             input.type = "text";
             input.className = "tar_ratio";
+            input.addEventListener("input", dailyMoney); // tar_ratio 입력 시 daily_money 업데이트
           } else if (i === 6) {
             input.type = "text";
             input.className = "daily_money";
@@ -274,28 +287,46 @@
             input.type = "text";
             input.className = "ticker";
           }
-          input.style.width = "100%";
-          input.style.boxSizing = "border-box";
-          input.style.padding = "5px";
-          input.style.border = "1px solid #ccc";
-          input.style.borderRadius = "4px";
           newCell.appendChild(input);
         }
       });
 
+      // 기존 dailyMoney 함수는 그대로 유지
       function dailyMoney() {
-        const days = document.querySelectorAll(".fix_date");
-        var date = days.length > 0 ? parseInt(days[0].value) : 0; // 첫 번째 입력값 사용
-        var totals = Array.from(document.querySelectorAll(".total")).map(
+        const days =
+          parseInt(document.getElementById("fix_date").textContent) || 0; // 기간
+        const moneyInput =
+          parseFloat(document.getElementById("money").value) || 0; // 총 금액
+
+        // 모든 total 값의 합을 계산
+        var totalInputs = document.querySelectorAll(".total");
+        var totalValues = Array.from(totalInputs).map(
           (input) => parseFloat(input.value) || 0
         );
-        var totalSum = totals.reduce((acc, total) => acc + total, 0);
+        var totalSum = totalValues.reduce((acc, total) => acc + total, 0);
 
-        const moneyInput = document.getElementById("money");
-        var a = parseFloat(moneyInput.value);
-        totalSum += a;
+        // 모든 tar_ratio 값의 합을 계산
+        var tarRatioInputs = document.querySelectorAll(".tar_ratio");
+        var tarRatios = Array.from(tarRatioInputs).map(
+          (input) => parseFloat(input.value) || 0
+        );
+        var tarSum = tarRatios.reduce((acc, tar) => acc + tar, 0);
 
-        console.log(totalSum);
+        // 각 행에 대해 daily_money 계산
+        var dailyMoneyInputs = document.querySelectorAll(".daily_money");
+        tarRatios.forEach((tarRatio, index) => {
+          // 비율에 따른 금액 계산
+          var calculatedAmount = ((moneyInput + totalSum) / tarSum) * tarRatio;
+
+          // 차액 계산
+          var difference = calculatedAmount - totalValues[index];
+
+          // 하루 금액 계산
+          var dailyAmount = days > 0 ? (difference / days).toFixed(2) : 0;
+
+          // daily_money 업데이트
+          dailyMoneyInputs[index].value = dailyAmount;
+        });
       }
     </script>
   </body>
