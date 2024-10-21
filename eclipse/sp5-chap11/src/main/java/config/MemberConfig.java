@@ -19,11 +19,11 @@ public class MemberConfig {
 	public DataSource dataSource() {
 		DataSource ds = new DataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost/spring5fs?characterEncoding=utf8");
-		ds.setUsername("spring5");
-		ds.setPassword("spring5");
+		ds.setUrl("jdbc:mysql://localhost:3307/spring5fs?characterEncoding=utf8");
+		ds.setUsername("root");
+		ds.setPassword("mysql");
 		ds.setInitialSize(2);
-		ds.setMaxActive(10);
+		ds.setMaxActive(30);
 		ds.setTestWhileIdle(true);
 		ds.setMinEvictableIdleTimeMillis(60000 * 3);
 		ds.setTimeBetweenEvictionRunsMillis(10 * 1000);

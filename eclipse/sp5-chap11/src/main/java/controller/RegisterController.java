@@ -20,6 +20,11 @@ public class RegisterController {
 			MemberRegisterService memberRegisterService) {
 		this.memberRegisterService = memberRegisterService;
 	}
+	
+	@GetMapping("/")
+	public String root() {
+		return "redirect:/register/step1";
+	}
 
 	@RequestMapping("/register/step1")
 	public String handleStep1() {

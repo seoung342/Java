@@ -8,14 +8,14 @@ public class Member {
 	private String email;
 	private String password;
 	private String name;
-	private LocalDateTime registerDateTime;
+	private LocalDateTime regDate;
 
 	public Member(String email, String password, 
-			String name, LocalDateTime regDateTime) {
+			String name, LocalDateTime regDate) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
-		this.registerDateTime = regDateTime;
+		this.regDate = regDate;
 	}
 
 	void setId(Long id) {
@@ -39,7 +39,7 @@ public class Member {
 	}
 
 	public LocalDateTime getRegisterDateTime() {
-		return registerDateTime;
+		return regDate;
 	}
 
 	public void changePassword(String oldPassword, String newPassword) {
